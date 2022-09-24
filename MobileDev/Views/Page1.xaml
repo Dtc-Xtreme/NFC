@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileDev.Views.Page1"
+             xmlns:v="clr-namespace:MobileDev.Views"
+             xmlns:vm="clr-namespace:MobileDev.ViewModels"
+             xmlns:con="clr-namespace:MobileDev.Converters"
+             Title="Page1">
+    
+    <ContentPage.Resources>
+        <con:FlipBoleanConverter x:Key="FlipBolean"></con:FlipBoleanConverter>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <StackLayout Grid.Column="0" BackgroundColor="Yellow">
+            <v:View1 IsVisible="{Binding SearchSeperation, Converter={StaticResource FlipBolean}}"/>
+        </StackLayout>
+        <v:View1 Grid.Column="1" IsVisible="{Binding SearchSeperation}"/>
+    </Grid>
+</ContentPage>
