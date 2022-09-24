@@ -6,23 +6,8 @@
              xmlns:vm="clr-namespace:MobileDev.ViewModels"
              xmlns:con="clr-namespace:MobileDev.Converters"
              Title="Home">
-    
-    <ContentPage.Resources>
-        <con:FlipBoleanConverter x:Key="FlipBolean"></con:FlipBoleanConverter>
-    </ContentPage.Resources>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
-        <StackLayout Grid.Column="0" BackgroundColor="Yellow">
-            <v:View1 IsVisible="{Binding SearchSeperation, Converter={StaticResource FlipBolean}}"/>
-        </StackLayout>
-        <v:View1 Grid.Column="1" IsVisible="{Binding SearchSeperation}"/>
-    </Grid>
+
+    <StackLayout>
+        <Label Text="Welcome!"/>
+    </StackLayout>
 </ContentPage>

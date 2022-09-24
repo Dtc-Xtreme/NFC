@@ -25,8 +25,10 @@ public static class MauiProgram
         builder.Services.AddTransient<ScoreTrackerViewModel>();
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<SettingsViewModel>();
-        builder.Services.AddTransient<View1>();
-        builder.Services.AddTransient<View2>();
+        builder.Services.AddTransient<LicenseSearchView>();
+        builder.Services.AddTransient<LicenseContentView>();
+        builder.Services.AddTransient<LicenseDetailPage>();
+        builder.Services.AddTransient<LicenseDetailViewModel>();
 
         return builder.Build();
 	}

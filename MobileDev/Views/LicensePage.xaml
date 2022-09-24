@@ -2,8 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDev.Views.LicensePage"
+             xmlns:v="clr-namespace:MobileDev.Views"
+             xmlns:vm="clr-namespace:MobileDev.ViewModels"
+             xmlns:con="clr-namespace:MobileDev.Converters"
              Title="License">
-    <VerticalStackLayout>
+    <ContentPage.Resources>
+        <con:FlipBoleanConverter x:Key="FlipBolean"></con:FlipBoleanConverter>
+    </ContentPage.Resources>
 
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <v:LicenseSearchView Grid.Row="0" Grid.Column="0"/>
+        <v:LicenseContentView Grid.Row="0" Grid.Column="1" IsVisible="{Binding Split, Mode=TwoWay}"/>
+        <!--<v:LicenseContentView Grid.Row="{Binding GridRow,Mode=TwoWay}" Grid.Column="{Binding GridCol, Mode=TwoWay}" IsVisible="{Binding Split, Mode=TwoWay}"/>-->
+    </Grid>
 </ContentPage>
