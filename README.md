@@ -6,5 +6,6 @@ MauiProgram.cs
   
 AppShell.xaml
   -> Menu
+  
 AppShell.xaml.cs
   -> Routes
