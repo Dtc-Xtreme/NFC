@@ -17,11 +17,14 @@ public static class MauiProgram
 			});
 
         builder.Services.AddTransient<AppShell>();
-		builder.Services.AddTransient<MainPage>();
-		builder.Services.AddTransient<Page1>();
-        builder.Services.AddTransient<Page1ViewModel>();
-        builder.Services.AddTransient<Page2>();
-        builder.Services.AddTransient<Page3>();
+		builder.Services.AddTransient<HomePage>();
+        builder.Services.AddTransient<HomeViewModel>();
+        builder.Services.AddTransient<LicensePage>();
+        builder.Services.AddTransient<LicenseViewModel>();
+        builder.Services.AddTransient<ScoreTrackerPage>();
+        builder.Services.AddTransient<ScoreTrackerViewModel>();
+        builder.Services.AddTransient<SettingsPage>();
+        builder.Services.AddTransient<SettingsViewModel>();
         builder.Services.AddTransient<View1>();
         builder.Services.AddTransient<View2>();
 

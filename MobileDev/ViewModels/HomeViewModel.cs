@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MobileDev.ViewModels
 {
-    public partial class Page1ViewModel : ObservableObject
+    public partial class HomeViewModel : BaseViewModel
     {
         // Properties//
         private bool searchSeperation = true;
@@ -24,7 +24,7 @@ namespace MobileDev.ViewModels
         }
 
         // Constructors //
-        public Page1ViewModel()
+        public HomeViewModel()
         {
             DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
             CheckOrientation();

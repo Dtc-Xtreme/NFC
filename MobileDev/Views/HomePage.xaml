@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileDev.Views.Page1"
+             x:Class="MobileDev.Views.HomePage"
              xmlns:v="clr-namespace:MobileDev.Views"
              xmlns:vm="clr-namespace:MobileDev.ViewModels"
              xmlns:con="clr-namespace:MobileDev.Converters"
-             Title="Page1">
+             Title="Home">
     
     <ContentPage.Resources>
         <con:FlipBoleanConverter x:Key="FlipBolean"></con:FlipBoleanConverter>

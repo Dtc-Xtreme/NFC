@@ -9,11 +9,14 @@
     FlyoutHeaderBehavior="CollapseOnScroll" Shell.TabBarIsVisible="False">
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Home" Route="Home" ContentTemplate="{DataTemplate local:MainPage}"/>
-        <ShellContent Title="Page1" Route="Page1" ContentTemplate="{DataTemplate views:Page1}"/>
-        <Tab Title="Test" >
-            <ShellContent Title="Page2"  Route="Page2" ContentTemplate="{DataTemplate views:Page2}"/>
-            <ShellContent Title="Page3" Route="Page3" ContentTemplate="{DataTemplate views:Page3}"/>
+        <ShellContent Title="Home" Route="Home" ContentTemplate="{DataTemplate views:HomePage}"/>
+        <Tab Title="License" >
+            <ShellContent Title="License"  Route="License" ContentTemplate="{DataTemplate views:LicensePage}"/>
+            <!--<ShellContent Title="Page3" Route="Page3" ContentTemplate="{DataTemplate views:Page3}"/>-->
         </Tab>
+        <ShellContent Title="Score Tracker" Route="Score" ContentTemplate="{DataTemplate views:ScoreTrackerPage}"/>
     </FlyoutItem>
+    
+    <ShellContent Title="Settings" Route="Settings" ContentTemplate="{DataTemplate views:SettingsPage}"/>
+    <!--<ShellContent Title="About" Route="About" ContentTemplate="{DataTemplate views:AboutPage}"/>-->
 </Shell>

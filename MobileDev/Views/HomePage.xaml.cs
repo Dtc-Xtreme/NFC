@@ -2,9 +2,9 @@ using MobileDev.ViewModels;
 
 namespace MobileDev.Views;
 
-public partial class Page1 : ContentPage
+public partial class HomePage : ContentPage
 {
-    public Page1(Page1ViewModel vm)
+    public HomePage(HomeViewModel vm)
 	{
         BindingContext = vm;
         InitializeComponent();
