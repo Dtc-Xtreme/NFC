@@ -73,6 +73,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="Plugin.Fingerprint" Version="3.0.0-beta.1" />
 	  <PackageReference Include="Plugin.NFC" Version="0.1.26" />
 	</ItemGroup>
 
@@ -121,6 +122,6 @@
 	  </Compile>
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMobileDevHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMobileDevHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionMobileDevHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

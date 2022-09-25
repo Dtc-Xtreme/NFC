@@ -1,5 +1,7 @@
 ﻿using MobileDev.ViewModels;
 using MobileDev.Views;
+using Plugin.Fingerprint.Abstractions;
+using Plugin.Fingerprint;
 
 namespace MobileDev;
 
@@ -17,7 +19,8 @@ public static class MauiProgram
 			});
 
         builder.Services.AddTransient<AppShell>();
-		builder.Services.AddTransient<HomePage>();
+        builder.Services.AddSingleton(typeof(IFingerprint), CrossFingerprint.Current);
+        builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<HomeViewModel>();
         builder.Services.AddTransient<LicensePage>();
         builder.Services.AddTransient<LicenseViewModel>();

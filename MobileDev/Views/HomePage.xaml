@@ -9,5 +9,11 @@
 
     <StackLayout>
         <Label Text="Welcome!"/>
+        <Button
+      Text="Authenticate"
+      FontAttributes="Bold"
+      SemanticProperties.Hint="Click to authenticate with your fingerprint"
+      Clicked="OnBiometricClicked"
+      HorizontalOptions="Center" />
     </StackLayout>
 </ContentPage>
