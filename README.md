@@ -1,6 +1,5 @@
 Dependencies
-  -> CommunityToolkit.Mvvm
-  -> Plugin.NFC
+  -> CommunityToolkit.Mvvm, Plugin.NFC
 
 MauiProgram.cs
   -> DPI -> Services, Configurations
