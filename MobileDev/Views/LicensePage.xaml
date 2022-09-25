@@ -16,12 +16,11 @@
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="{Binding ColumnWidth}"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <v:LicenseSearchView Grid.Row="0" Grid.Column="0"/>
         <v:LicenseContentView Grid.Row="0" Grid.Column="1" IsVisible="{Binding Split, Mode=TwoWay}"/>
-        <!--<v:LicenseContentView Grid.Row="{Binding GridRow,Mode=TwoWay}" Grid.Column="{Binding GridCol, Mode=TwoWay}" IsVisible="{Binding Split, Mode=TwoWay}"/>-->
     </Grid>
 </ContentPage>

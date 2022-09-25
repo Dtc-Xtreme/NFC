@@ -3,6 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDev.Views.SettingsPage"
              Title="Settings">
-    <StackLayout>
-    </StackLayout>
+    <Grid VerticalOptions="Start">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="50"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--Theme settings-->
+        <Label VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0">Theme</Label>
+        <Label VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Margin="20,0" FontAttributes="Bold">Dark theme</Label>
+        <Switch VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Margin="10,0" IsToggled="{Binding DarkTheme}"/>
+
+        <!--Hardware settings-->
+        <Label VerticalOptions="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0">Hardware</Label>
+        <Label VerticalOptions="Center" Grid.Row="3" Grid.Column="0" Margin="20,0" FontAttributes="Bold">NFC</Label>
+        <Switch VerticalOptions="Center" Grid.Row="3" Grid.Column="1" Margin="10,0" IsEnabled="False" IsToggled="{Binding NfcIsEnabled}" />
+    </Grid>
 </ContentPage>

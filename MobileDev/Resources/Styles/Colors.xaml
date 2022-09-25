@@ -41,4 +41,16 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    <FileImageSource x:Key="NFCBlack" File="nfc_black.png"/>
+    <FileImageSource x:Key="NFCWhite" File="nfc_white.png"/>
+    <FileImageSource x:Key="HomeBlack" File="home_black.png"/>
+    <FileImageSource x:Key="HomeWhite" File="home_white.png"/>
+    <FileImageSource x:Key="LicenseBlack" File="license_black.png"/>
+    <FileImageSource x:Key="LicenseWhite" File="license_white.png"/>
+    <FileImageSource x:Key="ScoreBlack" File="score_black.png"/>
+    <FileImageSource x:Key="ScoreWhite" File="score_white.png"/>
+    <FileImageSource x:Key="SettingsBlack" File="settings_black.png"/>
+    <FileImageSource x:Key="SettingsWhite" File="settings_white.png"/>
+
+
 </ResourceDictionary>

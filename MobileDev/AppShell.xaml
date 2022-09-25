@@ -9,14 +9,14 @@
     FlyoutHeaderBehavior="CollapseOnScroll" Shell.TabBarIsVisible="False">
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent Title="Home" Route="Home" ContentTemplate="{DataTemplate views:HomePage}"/>
-        <Tab Title="License" >
+        <ShellContent Title="Home" Route="Home" ContentTemplate="{DataTemplate views:HomePage}" Icon="{AppThemeBinding Light={StaticResource HomeBlack}, Dark={StaticResource HomeWhite}}"/>
+        <Tab Title="License" Icon="{AppThemeBinding Light={StaticResource LicenseBlack}, Dark={StaticResource LicenseWhite}}">
             <ShellContent Title="License"  Route="License" ContentTemplate="{DataTemplate views:LicensePage}"/>
             <!--<ShellContent Title="Page3" Route="Page3" ContentTemplate="{DataTemplate views:Page3}"/>-->
         </Tab>
-        <ShellContent Title="Score Tracker" Route="Score" ContentTemplate="{DataTemplate views:ScoreTrackerPage}"/>
+        <ShellContent Title="Score Tracker" Route="Score" ContentTemplate="{DataTemplate views:ScoreTrackerPage}" Icon="{AppThemeBinding Light={StaticResource ScoreBlack}, Dark={StaticResource ScoreWhite}}"/>
     </FlyoutItem>
-    
-    <ShellContent Title="Settings" Route="Settings" ContentTemplate="{DataTemplate views:SettingsPage}"/>
+
+    <ShellContent Title="Settings" Route="Settings" ContentTemplate="{DataTemplate views:SettingsPage}" Icon="{AppThemeBinding Light={StaticResource SettingsBlack}, Dark={StaticResource SettingsWhite}}"/>
     <!--<ShellContent Title="About" Route="About" ContentTemplate="{DataTemplate views:AboutPage}"/>-->
 </Shell>

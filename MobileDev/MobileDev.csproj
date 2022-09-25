@@ -33,6 +33,16 @@
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiImage Include="Resources\Icons\home_black.png" />
+		<MauiImage Include="Resources\Icons\home_white.png" />
+		<MauiImage Include="Resources\Icons\license_black.png" />
+		<MauiImage Include="Resources\Icons\license_white.png" />
+		<MauiImage Include="Resources\Icons\nfc_black.png" />
+		<MauiImage Include="Resources\Icons\nfc_white.png" />
+		<MauiImage Include="Resources\Icons\score_black.png" />
+		<MauiImage Include="Resources\Icons\score_white.png" />
+		<MauiImage Include="Resources\Icons\settings_black.png" />
+		<MauiImage Include="Resources\Icons\settings_white.png" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -49,7 +59,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Icons\home_black.png" />
+	  <None Remove="Resources\Icons\home_white.png" />
+	  <None Remove="Resources\Icons\license_black.png" />
+	  <None Remove="Resources\Icons\license_white.png" />
+	  <None Remove="Resources\Icons\nfc_black.png" />
+	  <None Remove="Resources\Icons\nfc_white.png" />
+	  <None Remove="Resources\Icons\score_black.png" />
+	  <None Remove="Resources\Icons\score_white.png" />
+	  <None Remove="Resources\Icons\settings_black.png" />
+	  <None Remove="Resources\Icons\settings_white.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	  <PackageReference Include="Plugin.NFC" Version="0.1.26" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Android.Icu.Util.LocaleData;
 
 namespace MobileDev.ViewModels
 {
@@ -41,28 +41,27 @@ namespace MobileDev.ViewModels
             }
         }
 
-        //private int gridRow = 0;
-        //public int GridRow
-        //{
-        //    get { return gridRow; }
-        //    set
-        //    {
-        //        gridRow = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        private bool nfcAvailable = true;
+        public bool NFCAvailable
+        {
+            get { return nfcAvailable; }
+            set
+            {
+                nfcAvailable = value;
+                OnPropertyChanged();
+            }
+        }
 
-        //private int gridCol = 0;
-        //public int GridCol
-        //{
-        //    get { return gridCol; }
-        //    set
-        //    {
-        //        gridCol = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
+        private GridLength columnWidth;
+        public GridLength ColumnWidth
+        {
+            get { return columnWidth; }
+            set
+            {
+                columnWidth = value;
+                OnPropertyChanged();
+            }
+        }
 
         private ObservableCollection<int> numberList;
         public ObservableCollection<int> NumberList
@@ -94,6 +93,12 @@ namespace MobileDev.ViewModels
         }
 
         [RelayCommand]
+        private void Nfc()
+        {
+            Number = 1;
+        }
+
+        [RelayCommand]
         private void LoadMoreData()
         {
             int counter = NumberList.Count();
@@ -116,14 +121,12 @@ namespace MobileDev.ViewModels
             if (orientation == DisplayOrientation.Portrait)
             {
                 Split = false;
-                //GridRow = 1;
-                //GridCol = 0;
+                ColumnWidth = GridLength.Auto;
             }
             else if (orientation == DisplayOrientation.Landscape)
             {
                 Split = true;
-                //GridRow = 0;
-                //GridCol = 1;
+                ColumnWidth = new GridLength(2, GridUnitType.Star);
             }
 
         }
