@@ -111,7 +111,7 @@ namespace MobileDev.ViewModels
 
         private async Task Navigate()
         {
-            await Shell.Current.GoToAsync($"Detail?Number={Number}"); 
+            await Shell.Current.GoToAsync($"//License/Detail?Number={Number}"); 
         }
 
         private void CheckOrientation()

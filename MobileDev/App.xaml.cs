@@ -11,7 +11,7 @@ public partial class App : Application
         this.serviceProvider = services;
         InitializeComponent();
 
-		//MainPage = new NavigationPage(serviceProvider.GetRequiredService<AppShell>());
+		//MainPage = new NavigationPage(serviceProvider.GetRequiredService<LicensePage>());
 		MainPage = serviceProvider.GetRequiredService<AppShell>();
 	}
 }
