@@ -2,9 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDev.Views.SettingsPage"
+             xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
              Title="Settings">
+    
     <Grid VerticalOptions="Start">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -16,13 +20,20 @@
         </Grid.ColumnDefinitions>
 
         <!--Theme settings-->
-        <Label VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0">Theme</Label>
-        <Label VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Margin="20,0" FontAttributes="Bold">Dark theme</Label>
+        <Label VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0" Text="{multilanguage:Translation Key=SettingThemeTitle}"/>
+        <Label VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Margin="26,0" FontAttributes="Bold" Text="{multilanguage:Translation Key=SettingDarkThemeLabel}"/>
         <Switch VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Margin="10,0" IsToggled="{Binding DarkTheme}"/>
 
+        <!--Language settings-->
+        <Label VerticalOptions="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0" Text="{multilanguage:Translation Key=SettingLanguageTitle}"/>
+        <VerticalStackLayout Grid.Row="3" RadioButtonGroup.GroupName="Language" Margin="20,0" RadioButtonGroup.SelectedValue="{Binding Language}">
+            <RadioButton Content="{multilanguage:Translation Key=SettingEnglishRadioButton}" Value="en"/>
+            <RadioButton Content="{multilanguage:Translation Key=SettingDutchRadioButton}" Value="nl"/>
+        </VerticalStackLayout>
+
         <!--Hardware settings-->
-        <Label VerticalOptions="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0">Hardware</Label>
-        <Label VerticalOptions="Center" Grid.Row="3" Grid.Column="0" Margin="20,0" FontAttributes="Bold">NFC</Label>
-        <Switch VerticalOptions="Center" Grid.Row="3" Grid.Column="1" Margin="10,0" IsEnabled="False" IsToggled="{Binding NfcIsEnabled}" />
+        <Label VerticalOptions="Center" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0" Text="{multilanguage:Translation Key=SettingSensorTitle}"/>
+        <Label VerticalOptions="Center" Grid.Row="5" Grid.Column="0" Margin="26,0" FontAttributes="Bold" Text="{multilanguage:Translation Key=SettingNFCLabel}"/>
+        <Switch VerticalOptions="Center" Grid.Row="5" Grid.Column="1" Margin="10,0" IsEnabled="False" IsToggled="{Binding NfcIsEnabled}" />
     </Grid>
 </ContentPage>
