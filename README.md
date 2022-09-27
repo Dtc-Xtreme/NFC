@@ -1,5 +1,5 @@
 Dependencies
-  -> CommunityToolkit.Mvvm, Plugin.NFC
+  -> CommunityToolkit.Mvvm, Plugin.NFC, banditoth.MAUI.Multilanguage
 
 MauiProgram.cs
   -> DPI -> Services, Configurations
