@@ -135,6 +135,10 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Repositories\" />
+	</ItemGroup>
+
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMobileDevHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionMobileDevHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

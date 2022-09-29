@@ -16,5 +16,7 @@
       SemanticProperties.Hint="Click to authenticate with your fingerprint"
       Clicked="OnBiometricClicked"
       HorizontalOptions="Center" />
+
+        <Button Command="{Binding GetAPICommand}" Text="Get API data"/>
     </StackLayout>
 </ContentPage>
