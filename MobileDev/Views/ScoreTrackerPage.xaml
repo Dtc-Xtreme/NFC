@@ -2,33 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDev.Views.ScoreTrackerPage"
+             xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
              Title="Score Tracker">
     <ScrollView>
         <VerticalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center">
                 <VerticalStackLayout Margin="20,0">
-                    <Label Text="Home" FontSize="40" FontAttributes="Bold" Margin="0,15" HorizontalTextAlignment="Center"/>
-                    <Button Text="+" FontSize="40" Command="{Binding PlusCommand}" CommandParameter="Home" Margin="20"/>
+                    <Label Text="{multilanguage:Translation Key=ScoreTrackerHomeLabel}" FontSize="40" FontAttributes="Bold" Margin="0,15" HorizontalTextAlignment="Center"/>
+                    <Button Text="+" FontSize="40" WidthRequest="80" HeightRequest="80" Command="{Binding PlusCommand}" CommandParameter="Home" Margin="20"/>
                     <!--<Button Text="˄" FontSize="40" Command="{Binding PlusCommand}" CommandParameter="Home" Margin="20"/>-->
                     <Label Text="{Binding Home, Mode=TwoWay}" FontSize="80" HorizontalTextAlignment="Center"/>
-                    <Button Text="-" FontSize="40" Command="{Binding MinCommand}" CommandParameter="Home" Margin="20"/>
+                    <Button Text="-" FontSize="40" WidthRequest="80" HeightRequest="80" Command="{Binding MinCommand}" CommandParameter="Home" Margin="20"/>
                     <!--<Button Text="˅" FontSize="40" Command="{Binding MinCommand}" CommandParameter="Home" Margin="20"/>-->
                 </VerticalStackLayout>
                 <VerticalStackLayout Margin="20,0">
-                    <Label Text="Visitor" FontSize="40" FontAttributes="Bold" Margin="0,15" HorizontalTextAlignment="Center"/>
-                    <Button Text="+" FontSize="40" Command="{Binding PlusCommand}" CommandParameter="Visitor" Margin="20"/>
+                    <Label Text="{multilanguage:Translation Key=ScoreTrackerVisitorLabel}" FontSize="40" FontAttributes="Bold" Margin="0,15" HorizontalTextAlignment="Center"/>
+                    <Button Text="+" FontSize="40" WidthRequest="80" HeightRequest="80" Command="{Binding PlusCommand}" CommandParameter="Visitor" Margin="20"/>
                     <!--<Button Text="˄" FontSize="40" Command="{Binding PlusCommand}" CommandParameter="Visitor" Margin="20"/>-->
                     <Label Text="{Binding Visitor, Mode=TwoWay}" FontSize="80" HorizontalTextAlignment="Center"/>
-                    <Button Text="-" FontSize="40" Command="{Binding MinCommand}" CommandParameter="Visitor" Margin="20"/>
+                    <Button Text="-" FontSize="40" WidthRequest="80" HeightRequest="80" Command="{Binding MinCommand}" CommandParameter="Visitor" Margin="20"/>
                     <!--<Button Text="˄" FontSize="40" Command="{Binding PlusCommand}" CommandParameter="Visitor" Margin="20"/>-->
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Button Text="Save" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="9" Padding="15" BackgroundColor="Green" Command="{Binding SaveCommand}" IsEnabled="{Binding SaveIsEnabled, Mode=TwoWay}"/>
-                <Button Text="Clear score" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="9" Padding="15" BackgroundColor="Orange" Command="{Binding ClearScoreCommand}"/>
-                <Button Text="Clear results" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="9" Padding="15" BackgroundColor="Red" Command="{Binding ClearResultsCommand}"/>
-            </HorizontalStackLayout>
+            <VerticalStackLayout HorizontalOptions="Center">
+                <HorizontalStackLayout>
+                    <Button Text="{multilanguage:Translation Key=ScoreTrackerSaveButton}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="9" Padding="15" BackgroundColor="Green" Command="{Binding SaveCommand}" IsEnabled="{Binding SaveIsEnabled, Mode=TwoWay}"/>
+                    <Button Text="{multilanguage:Translation Key=ScoreTrackerClearScoreButton}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="9" Padding="15" BackgroundColor="Orange" Command="{Binding ClearScoreCommand}"/>
+                </HorizontalStackLayout>
+                <Button Text="{multilanguage:Translation Key=ScoreTrackerClearResultsButton}" TextColor="White" FontSize="18" FontAttributes="Bold" Margin="9" Padding="15" BackgroundColor="Red" Command="{Binding ClearResultsCommand}"/>
+            </VerticalStackLayout>
 
             <HorizontalStackLayout HorizontalOptions="Center" Margin="0,10">
                 <Label Text="{Binding Result, Mode=TwoWay}" FontSize="20" FontAttributes="Bold"/>

@@ -5,10 +5,11 @@
              xmlns:v="clr-namespace:MobileDev.Views"
              xmlns:vm="clr-namespace:MobileDev.ViewModels"
              xmlns:con="clr-namespace:MobileDev.Converters"
+             xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
              Title="Home">
 
     <StackLayout>
-        <Label Text="Welcome!"/>
+        <Label Text="{multilanguage:Translation Key=WelcomeText}"/>
         <Button
       Text="Authenticate"
       FontAttributes="Bold"
