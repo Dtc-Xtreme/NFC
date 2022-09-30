@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
             new CalendarItem(DateTime.Parse("29/10/2022"), "Competitie", "Boekt A VS Maasmechelen B"),
         };
 
-        [HttpGet(Name = "GetCalendar")]
+        [HttpGet]
         public IEnumerable<CalendarItem> Get()
         {
             return CalenderItems.ToList();

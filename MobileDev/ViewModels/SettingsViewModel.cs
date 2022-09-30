@@ -1,6 +1,5 @@
 ﻿using banditoth.MAUI.Multilanguage.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
-using IntelliJ.Lang.Annotations;
 using Microsoft.Extensions.Configuration;
 using Plugin.NFC;
 using System;
