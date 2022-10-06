@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Org.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using static Java.Util.Jar.Attributes;
 
 namespace MobileDev.Models
 {
@@ -11,22 +14,18 @@ namespace MobileDev.Models
         public bool DarkTheme { get; set; }
         public string Language { get; set; }
 
+        public Settings()
+        {
+            DarkTheme = false;
+            Language = "en";
+        }
+
         public async void Save()
         {
+            string path = FileSystem.Current.AppDataDirectory;
+            string fullPath = Path.Combine(path, "settings.json");
             string jsonString = System.Text.Json.JsonSerializer.Serialize(this);
-            var path = FileSystem.Current.CacheDirectory;
-            var fullPath = Path.Combine(path, "test1.json");
             File.WriteAllText(fullPath, jsonString);
-            string test1 = File.ReadAllText(fullPath);
-
-            var xpath = FileSystem.Current.AppDataDirectory;
-            var xfullPath = Path.Combine(xpath, "test2.json");
-            File.WriteAllText(xfullPath, jsonString);
-            string test2 = File.ReadAllText(fullPath);
-
-            //var stream = await FileSystem.Current.OpenAppPackageFileAsync("appsettings.json");
-            //using StreamReader reader = new StreamReader(stream);
-            //var contents = reader.ReadToEnd();
         }
     }
 }

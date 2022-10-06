@@ -25,7 +25,7 @@ namespace MobileDev.ViewModels
             // Check  theme and languages setting when started.
             this.configuration = conf;
             this.translator = trans;
-            Settings settings = configuration.GetRequiredSection("Settings").Get<Settings>();
+            Settings settings = configuration.Get<Settings>();
 
             if (settings.DarkTheme)
             {

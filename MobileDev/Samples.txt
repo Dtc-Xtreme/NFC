@@ -1,0 +1,3 @@
+﻿(Application.Current.UserAppTheme == AppTheme.Light
+Application.Current.UserAppTheme == AppTheme.Dark
+Application.Current.UserAppTheme == AppTheme.Unspecified

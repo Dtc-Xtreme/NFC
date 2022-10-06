@@ -9,6 +9,8 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using System.Runtime.CompilerServices;
+using Org.Json;
+using Microsoft.Maui.Layouts;
 
 namespace MobileDev;
 
@@ -18,13 +20,36 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
 
-        // appsettings.json implementation
-        Assembly a = Assembly.GetExecutingAssembly();
-        using Stream stream = a.GetManifestResourceStream("MobileDev.appsettings.json");
-        var config = new ConfigurationBuilder()
-            .AddJsonStream(stream)
+        IConfigurationRoot config;
+        string path = FileSystem.Current.AppDataDirectory;
+        string fullPath = Path.Combine(path, "settings.json");
+
+        if (File.Exists(fullPath))
+        {
+            config = new ConfigurationBuilder()
+                .AddJsonFile(fullPath)
+                .Build();
+        }
+        else
+        {
+            Settings settings = new Settings();
+            string jsonString = System.Text.Json.JsonSerializer.Serialize<Settings>(settings);
+            File.WriteAllText(fullPath, jsonString);
+
+            config = new ConfigurationBuilder()
+            .AddJsonFile(fullPath)
             .Build();
+
+            // appsettings.json implementation readonly
+            //Assembly a = Assembly.GetExecutingAssembly();
+            //using Stream stream = a.GetManifestResourceStream("MobileDev.appsettings.json");
+
+            //config = new ConfigurationBuilder()
+            //    .AddJsonStream(stream)
+            //    .Build();
+        }
         builder.Configuration.AddConfiguration(config);
+
 
         builder
             .UseMauiApp<App>()
