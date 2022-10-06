@@ -9,7 +9,6 @@ using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using System.Runtime.CompilerServices;
-using Org.Json;
 using Microsoft.Maui.Layouts;
 
 namespace MobileDev;

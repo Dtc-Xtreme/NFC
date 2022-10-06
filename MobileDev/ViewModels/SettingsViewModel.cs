@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MobileDev.Models;
+using Android.Bluetooth;
 
 namespace MobileDev.ViewModels
 {
@@ -42,16 +43,14 @@ namespace MobileDev.ViewModels
                 this.darkTheme = value;
                 if (value)
                 {
-                    settings.DarkTheme = true;
                     Application.Current.UserAppTheme = AppTheme.Dark;
                 }
                 else
                 {
-                    settings.DarkTheme = false;
                     Application.Current.UserAppTheme = AppTheme.Light;
                 }
-                settings.Save();
                 OnPropertyChanged();
+                settings.DarkTheme = value;
             }
         }
         public string Language
@@ -60,9 +59,9 @@ namespace MobileDev.ViewModels
             set
             {
                 language = value;
-                OnPropertyChanged();
                 translator.SetCurrentCulture(new CultureInfo(value));
-                settings.Save();
+                OnPropertyChanged();
+                settings.Language = language;
             }
         }
         public bool NfcIsEnabled

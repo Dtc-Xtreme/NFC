@@ -1,31 +1,51 @@
-﻿using Org.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using static Java.Util.Jar.Attributes;
 
 namespace MobileDev.Models
 {
     public class Settings
     {
-        public bool DarkTheme { get; set; }
-        public string Language { get; set; }
+        private bool darkTheme;
+        private string language;
+
+        public bool DarkTheme {
+            get { return darkTheme; }
+            set { 
+                darkTheme = value;
+                Save();
+            }
+        }
+        public string Language {
+            get { return language; }
+            set
+            {
+                language = value;
+                Save();
+            }
+        }
 
         public Settings()
         {
-            DarkTheme = false;
-            Language = "en";
+            this.darkTheme = false;
+            this.language = "en";
         }
 
-        public async void Save()
+        public Settings(bool darkTheme, string language)
+        {
+            DarkTheme = darkTheme;
+            Language = language;
+        }
+
+        private async void Save()
         {
             string path = FileSystem.Current.AppDataDirectory;
             string fullPath = Path.Combine(path, "settings.json");
             string jsonString = System.Text.Json.JsonSerializer.Serialize(this);
-            File.WriteAllText(fullPath, jsonString);
+            await File.WriteAllTextAsync(fullPath, jsonString);
         }
     }
 }
