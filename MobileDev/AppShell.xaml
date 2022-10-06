@@ -12,16 +12,11 @@
         <ShellContent Title="Home" Route="Home" ContentTemplate="{DataTemplate views:HomePage}" />
     </FlyoutItem>
 
-    <!-- FlyoutDisplayOptions="AsMultipleItems" -->
     <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource LicenseBlack}, Dark={StaticResource LicenseWhite}}" Title="License">
         <ShellContent Title="License" Route="License" ContentTemplate="{DataTemplate views:LicensePage}"/>
-        <!--<Tab Title="License" Icon="{AppThemeBinding Light={StaticResource LicenseBlack}, Dark={StaticResource LicenseWhite}}">
-            <ShellContent Title="License" Route="License" ContentTemplate="{DataTemplate views:LicensePage}"/>
-            --><!--<ShellContent Title="Page3" Route="Page3" ContentTemplate="{DataTemplate views:Page3}"/>--><!--
-        </Tab>-->
     </FlyoutItem>
 
-    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource ScoreBlack}, Dark={StaticResource ScoreWhite}}"  Title="Score Tracker">
+    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource ScoreBlack}, Dark={StaticResource ScoreWhite}}" Title="Score Tracker">
         <ShellContent Title="Score Tracker" Route="Score" ContentTemplate="{DataTemplate views:ScoreTrackerPage}"/>
     </FlyoutItem>
     

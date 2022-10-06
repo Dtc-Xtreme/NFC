@@ -26,22 +26,24 @@ namespace MobileDev.ViewModels
             this.configuration = conf;
             this.translator = trans;
             this.settings = configuration.GetRequiredSection("Settings").Get<Settings>();
+            DarkTheme = settings.DarkTheme;
+            Language = settings.Language;
 
             Language = this.translator.CurrentCulture.IetfLanguageTag;
             AppTheme deviceTheme = Application.Current.PlatformAppTheme;
 
-            if (Application.Current.UserAppTheme == AppTheme.Unspecified)
-            {
+            //if (Application.Current.UserAppTheme == AppTheme.Unspecified)
+            //{
 
-            }
-            else if (Application.Current.UserAppTheme == AppTheme.Light)
-            {
-                DarkTheme = false;
-            }
-            else if (Application.Current.UserAppTheme == AppTheme.Dark)
-            {
-                DarkTheme = true;
-            }
+            //}
+            //else if (Application.Current.UserAppTheme == AppTheme.Light)
+            //{
+            //    DarkTheme = false;
+            //}
+            //else if (Application.Current.UserAppTheme == AppTheme.Dark)
+            //{
+            //    DarkTheme = true;
+            //}
             NfcIsEnabled = CrossNFC.Current.IsEnabled;
         }
 

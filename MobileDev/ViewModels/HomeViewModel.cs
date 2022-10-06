@@ -27,10 +27,13 @@ namespace MobileDev.ViewModels
             this.translator = trans;
             Settings settings = configuration.GetRequiredSection("Settings").Get<Settings>();
 
-
             if (settings.DarkTheme)
             {
                 Application.Current.UserAppTheme = AppTheme.Dark;
+            }
+            else
+            {
+                Application.Current.UserAppTheme = AppTheme.Light;
             }
 
             translator.SetCurrentCulture(new CultureInfo(settings.Language));
