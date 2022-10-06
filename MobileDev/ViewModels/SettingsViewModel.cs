@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MobileDev.Models;
 
 namespace MobileDev.ViewModels
 {
@@ -15,6 +16,7 @@ namespace MobileDev.ViewModels
     {
         private IConfiguration configuration;
         private ITranslator translator;
+        private Settings settings;
         private bool darkTheme = false;
         private string language;
         private bool nfcIsEnabled;
@@ -23,8 +25,11 @@ namespace MobileDev.ViewModels
         {
             this.configuration = conf;
             this.translator = trans;
+            this.settings = configuration.GetRequiredSection("Settings").Get<Settings>();
+
             Language = this.translator.CurrentCulture.IetfLanguageTag;
-            var deviceTheme = Application.Current.PlatformAppTheme;
+            AppTheme deviceTheme = Application.Current.PlatformAppTheme;
+
             if (Application.Current.UserAppTheme == AppTheme.Unspecified)
             {
 
@@ -48,12 +53,15 @@ namespace MobileDev.ViewModels
                 this.darkTheme = value;
                 if (value)
                 {
+                    settings.DarkTheme = true;
                     Application.Current.UserAppTheme = AppTheme.Dark;
                 }
                 else
                 {
+                    settings.DarkTheme = false;
                     Application.Current.UserAppTheme = AppTheme.Light;
                 }
+                settings.Save();
                 OnPropertyChanged();
             }
         }
@@ -65,6 +73,7 @@ namespace MobileDev.ViewModels
                 language = value;
                 OnPropertyChanged();
                 translator.SetCurrentCulture(new CultureInfo(value));
+                settings.Save();
             }
         }
         public bool NfcIsEnabled

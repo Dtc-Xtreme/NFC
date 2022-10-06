@@ -59,6 +59,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="appsettings.json" />
 	  <None Remove="Resources\Icons\home_black.png" />
 	  <None Remove="Resources\Icons\home_white.png" />
 	  <None Remove="Resources\Icons\license_black.png" />
@@ -72,8 +73,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Include="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="banditoth.MAUI.Multilanguage" Version="1.0.4" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0-rc.1.22426.10" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0-rc.1.22426.10" />
 	  <PackageReference Include="Plugin.Fingerprint" Version="3.0.0-beta.1" />
 	  <PackageReference Include="Plugin.NFC" Version="0.1.26" />
 	</ItemGroup>

@@ -21,7 +21,7 @@
 
         <!--Theme settings-->
         <Label VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0" Text="{multilanguage:Translation Key=SettingThemeTitle}"/>
-        <Label VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Margin="26,0" FontAttributes="Bold" Text="{multilanguage:Translation Key=SettingDarkThemeLabel}"/>
+        <Label VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Margin="26,0" Text="{multilanguage:Translation Key=SettingDarkThemeLabel}"/>
         <Switch VerticalOptions="Center" Grid.Row="1" Grid.Column="1" Margin="10,0" IsToggled="{Binding DarkTheme}"/>
 
         <!--Language settings-->
@@ -33,7 +33,7 @@
 
         <!--Hardware settings-->
         <Label VerticalOptions="Center" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Title" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0" Text="{multilanguage:Translation Key=SettingSensorTitle}"/>
-        <Label VerticalOptions="Center" Grid.Row="5" Grid.Column="0" Margin="26,0" FontAttributes="Bold" Text="{multilanguage:Translation Key=SettingNFCLabel}"/>
+        <Label VerticalOptions="Center" Grid.Row="5" Grid.Column="0" Margin="26,0" Text="{multilanguage:Translation Key=SettingNFCLabel}"/>
         <Switch VerticalOptions="Center" Grid.Row="5" Grid.Column="1" Margin="10,0" IsEnabled="False" IsToggled="{Binding NfcIsEnabled}" />
     </Grid>
 </ContentPage>

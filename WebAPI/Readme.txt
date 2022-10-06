@@ -1,0 +1,1 @@
+﻿firefox about:config -> security.tls.version.max -> 4 naar 3 veranderen

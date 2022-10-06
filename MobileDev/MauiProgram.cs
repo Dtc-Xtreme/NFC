@@ -4,6 +4,11 @@ using Plugin.Fingerprint.Abstractions;
 using Plugin.Fingerprint;
 using banditoth.MAUI.Multilanguage;
 using MobileDev.Resources.Translations;
+using MobileDev.Models;
+using System.Reflection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using System.Runtime.CompilerServices;
 
 namespace MobileDev;
 
@@ -12,6 +17,15 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+
+        // appsettings.json implementation
+        Assembly a = Assembly.GetExecutingAssembly();
+        using Stream stream = a.GetManifestResourceStream("MobileDev.appsettings.json");
+        var config = new ConfigurationBuilder()
+            .AddJsonStream(stream)
+            .Build();
+        builder.Configuration.AddConfiguration(config);
+
         builder
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
@@ -39,6 +53,7 @@ public static class MauiProgram
             config.SetTranslationNotFoundText("Transl_Not_Found:", appendTranslationKey: true);
             });
 
+        // Add Services
         builder.Services.AddTransient<AppShell>();
         builder.Services.AddSingleton(typeof(IFingerprint), CrossFingerprint.Current);
         builder.Services.AddTransient<HomePage>();
