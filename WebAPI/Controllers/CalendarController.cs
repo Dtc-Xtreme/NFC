@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Globalization;
-using WebAPI.Models;
+using PetanqueCL.Models;
 
 namespace WebAPI.Controllers
 {

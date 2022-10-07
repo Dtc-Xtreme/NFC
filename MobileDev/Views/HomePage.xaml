@@ -18,5 +18,6 @@
       HorizontalOptions="Center" />
 
         <Button Command="{Binding GetAPICommand}" Text="Get API data"/>
+        <ListView ItemsSource="{Binding Items, Mode=TwoWay}"/>
     </StackLayout>
 </ContentPage>

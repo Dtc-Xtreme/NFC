@@ -149,6 +149,10 @@
 	  <Folder Include="Repositories\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\PetanqueCL\PetanqueCL.csproj" />
+	</ItemGroup>
+
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMobileDevHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionMobileDevHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

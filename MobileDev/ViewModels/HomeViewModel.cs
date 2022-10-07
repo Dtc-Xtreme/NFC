@@ -12,6 +12,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using MobileDev.Models;
+using PetanqueCL.Models;
+using System.Collections.ObjectModel;
 
 namespace MobileDev.ViewModels
 {
@@ -19,6 +21,7 @@ namespace MobileDev.ViewModels
     {
         private IConfiguration configuration;
         private ITranslator translator;
+        private ObservableCollection<CalendarItem> items;
 
         public HomeViewModel(IConfiguration conf, ITranslator trans)
         {
@@ -39,6 +42,16 @@ namespace MobileDev.ViewModels
             translator.SetCurrentCulture(new CultureInfo(settings.Language));
         }
 
+        public ObservableCollection<CalendarItem> Items
+        {
+            get { return items; }
+            set
+            {
+                items = value;
+                OnPropertyChanged();
+            }
+        }
+
         [RelayCommand]
         private async void GetAPI()
         {
@@ -48,6 +61,7 @@ namespace MobileDev.ViewModels
                 HttpResponseMessage response = await client.GetAsync("https://home.dtc-xtreme.net:7163/Calendar");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
+                Items = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<CalendarItem>>(responseBody);
             }catch(Exception ex)
             {
                 //

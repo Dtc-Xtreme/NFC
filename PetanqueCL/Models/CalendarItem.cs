@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Models
+﻿namespace PetanqueCL.Models
 {
     public class CalendarItem
     {
@@ -20,5 +20,10 @@
         public DateTime Date { get => date; set => date = value; }
         public string Title { get => title; set => title = value; }
         public string Description { get => description; set => description = value; }
+
+        public override string ToString()
+        {
+            return Date.ToShortDateString() + " - " + Title + " - " + Description;
+        }
     }
 }
