@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Layouts;
+using MobileDev.Services;
 
 namespace MobileDev;
 
@@ -80,6 +81,7 @@ public static class MauiProgram
         // Add Services
         builder.Services.AddTransient<AppShell>();
         builder.Services.AddSingleton(typeof(IFingerprint), CrossFingerprint.Current);
+        builder.Services.AddSingleton<IAlertService, AlertService>();
         builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<HomeViewModel>();
         builder.Services.AddTransient<LicensePage>();
