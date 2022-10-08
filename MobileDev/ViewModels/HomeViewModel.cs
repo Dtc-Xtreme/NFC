@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using MobileDev.Models;
 using PetanqueCL.Models;
 using System.Collections.ObjectModel;
+using System.Net.Http.Json;
 
 namespace MobileDev.ViewModels
 {
@@ -21,7 +22,7 @@ namespace MobileDev.ViewModels
     {
         private IConfiguration configuration;
         private ITranslator translator;
-        private ObservableCollection<CalendarItem> items;
+        private List<CalendarItem> items;
 
         public HomeViewModel(IConfiguration conf, ITranslator trans)
         {
@@ -42,7 +43,7 @@ namespace MobileDev.ViewModels
             translator.SetCurrentCulture(new CultureInfo(settings.Language));
         }
 
-        public ObservableCollection<CalendarItem> Items
+        public List<CalendarItem> Items
         {
             get { return items; }
             set
@@ -60,8 +61,7 @@ namespace MobileDev.ViewModels
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.GetAsync("https://home.dtc-xtreme.net:7163/Calendar");
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                Items = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<CalendarItem>>(responseBody);
+                Items = await response.Content.ReadFromJsonAsync<List<CalendarItem>>();
             }catch(Exception ex)
             {
                 //
