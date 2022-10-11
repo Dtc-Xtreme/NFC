@@ -1,2 +1,2 @@
-﻿add-migration PetanqueDBv1.3
+﻿add-migration PetanqueDBv1.0
 update-database –verbose
