@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MobileDev.Models;
-using Android.Bluetooth;
 
 namespace MobileDev.ViewModels
 {

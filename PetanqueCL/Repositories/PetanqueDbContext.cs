@@ -14,7 +14,7 @@ namespace Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(settings.sql);
+            optionsBuilder.UseSqlServer(settings.ConnectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
