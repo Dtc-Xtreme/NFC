@@ -1,6 +1,6 @@
 ﻿namespace PetanqueCL.Models
 {
-    public class CalendarItem
+    public class CalendarItem : BaseModel
     {
         private DateTime date;
         private string title;
