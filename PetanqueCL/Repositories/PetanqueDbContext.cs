@@ -6,6 +6,7 @@ namespace Repositories
 {
     public class PetanqueDbContext : DbContext
     {
+        private Settings settings = new Settings();
         public PetanqueDbContext()
         {
 
@@ -13,7 +14,7 @@ namespace Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=PetanqueDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(settings.sql);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
