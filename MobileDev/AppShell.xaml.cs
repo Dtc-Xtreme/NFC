@@ -1,4 +1,6 @@
 ﻿using MobileDev.Views;
+using Repositories.SeedData;
+using Repositories;
 
 namespace MobileDev;
 
@@ -9,6 +11,7 @@ public partial class AppShell : Shell
     public AppShell(IServiceProvider services)
 	{
         this.serviceProvider = services;
+
         InitializeComponent();
 
 		Routing.RegisterRoute("Home", typeof(HomePage));

@@ -15,6 +15,9 @@ using MobileDev.Models;
 using PetanqueCL.Models;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
+using Repositories.SeedData;
+using Microsoft.Extensions.DependencyInjection;
+using Repositories;
 
 namespace MobileDev.ViewModels
 {
@@ -22,13 +25,23 @@ namespace MobileDev.ViewModels
     {
         private IConfiguration configuration;
         private ITranslator translator;
+        private IServiceProvider serviceProvider;
         private List<CalendarItem> items;
+        private bool isRefreshing = false;
 
-        public HomeViewModel(IConfiguration conf, ITranslator trans)
+        public HomeViewModel(IConfiguration conf, ITranslator trans, IServiceProvider serv)
         {
             // Check  theme and languages setting when started.
             this.configuration = conf;
             this.translator = trans;
+            this.serviceProvider = serv;
+
+            if(DeviceInfo.Current.Platform == DevicePlatform.WinUI)
+            {
+                // fill database with data
+                SeedData.EnsurePopulated(serviceProvider.GetService<PetanqueDbContext>());
+            }
+
             Settings settings = configuration.Get<Settings>();
 
             if (settings.DarkTheme)
@@ -41,6 +54,7 @@ namespace MobileDev.ViewModels
             }
 
             translator.SetCurrentCulture(new CultureInfo(settings.Language));
+            GetAPI();
         }
 
         public List<CalendarItem> Items
@@ -53,15 +67,25 @@ namespace MobileDev.ViewModels
             }
         }
 
+        public bool IsRefreshing
+        {
+            get { return isRefreshing; }
+            set {
+                isRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
+
         [RelayCommand]
         private async void GetAPI()
         {
             try
             {
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync("https://home.dtc-xtreme.net:7163/Calendar");
+                HttpResponseMessage response = await client.GetAsync("https://api.dtc-xtreme.net/Calendar");
                 response.EnsureSuccessStatusCode();
                 Items = await response.Content.ReadFromJsonAsync<List<CalendarItem>>();
+                IsRefreshing = false;
             }catch(Exception ex)
             {
                 //

@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui;
 using MobileDev.Services;
+using PetanqueCL.Models;
+using PetanqueCL.Repositories;
 using Plugin.NFC;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace MobileDev.ViewModels
     public partial class LicenseViewModel : BaseViewModel
     {
         private IAlertService alertService;
+        private ILicenseRepository repository;
         private DisplayOrientation orientation;
         private int pageSize = 40;
 
@@ -26,10 +29,13 @@ namespace MobileDev.ViewModels
         private GridLength columnWidth;
         private ObservableCollection<int> numberList;
         private List<int> ints = new List<int>();
+        private List<License> licenses = new List<License>();
+        private ObservableCollection<License> licensesList = new ObservableCollection<License>();
 
-        public LicenseViewModel(IAlertService alert)
+        public LicenseViewModel(IAlertService alert, ILicenseRepository repo)
         {
             this.alertService = alert;
+            this.repository = repo;
             DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
             CheckOrientation();
 
@@ -38,7 +44,10 @@ namespace MobileDev.ViewModels
             {
                 ints.Add(x);
             }
+
             NumberList = new ObservableCollection<int>(ints.Take(pageSize));
+            //licenses = repository.Licenses.ToList();
+            //LicensesList = new ObservableCollection<License>(licenses.Take(pageSize));
         }
 
         public bool Split
@@ -90,6 +99,18 @@ namespace MobileDev.ViewModels
             set
             {
                 numberList = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<License> LicensesList
+        {
+            get
+            {
+                return licensesList;
+            }
+            set
+            {
+                licensesList = value;
                 OnPropertyChanged();
             }
         }

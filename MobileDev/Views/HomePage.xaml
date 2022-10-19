@@ -8,16 +8,20 @@
              xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
              Title="Home">
 
-    <StackLayout>
-        <Label Text="{multilanguage:Translation Key=WelcomeText}"/>
-        <Button
-      Text="Authenticate"
-      FontAttributes="Bold"
-      SemanticProperties.Hint="Click to authenticate with your fingerprint"
-      Clicked="OnBiometricClicked"
-      HorizontalOptions="Center" />
 
-        <Button Command="{Binding GetAPICommand}" Text="Get API data"/>
-        <ListView ItemsSource="{Binding Items, Mode=TwoWay}"/>
+    <StackLayout>
+        <Label FontAttributes="Bold" FontSize="20" Text="{multilanguage:Translation Key=WelcomeText}" Padding="20"/>
+        <RefreshView Command="{Binding GetAPICommand}" IsRefreshing="{Binding IsRefreshing}">
+            <ScrollView>
+                <ListView ItemsSource="{Binding Items, Mode=TwoWay}"/>
+            </ScrollView>
+        </RefreshView>
     </StackLayout>
 </ContentPage>
+
+<!--<Button
+          Text="Authenticate"
+          FontAttributes="Bold"
+          SemanticProperties.Hint="Click to authenticate with your fingerprint"
+          Clicked="OnBiometricClicked"
+          HorizontalOptions="Center" />-->
