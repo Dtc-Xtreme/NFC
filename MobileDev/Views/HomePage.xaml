@@ -12,9 +12,7 @@
     <StackLayout>
         <Label FontAttributes="Bold" FontSize="20" Text="{multilanguage:Translation Key=WelcomeText}" Padding="20"/>
         <RefreshView Command="{Binding GetAPICommand}" IsRefreshing="{Binding IsRefreshing}">
-            <ScrollView>
-                <ListView ItemsSource="{Binding Items, Mode=TwoWay}"/>
-            </ScrollView>
+            <ListView ItemsSource="{Binding Items, Mode=TwoWay}"/>
         </RefreshView>
     </StackLayout>
 </ContentPage>

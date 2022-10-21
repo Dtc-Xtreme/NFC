@@ -14,8 +14,8 @@ public partial class LicenseDetailPage : ContentPage
 	{
         base.OnNavigatedTo(args);
         //var a = Navigation.NavigationStack;
-        var b = Shell.Current.CurrentPage;
-        var c = Shell.Current.CurrentState;
-        var d = Shell.Current.CurrentItem;
+        //var b = Shell.Current.CurrentPage;
+        //var c = Shell.Current.CurrentState;
+        //var d = Shell.Current.CurrentItem;
     }
 }

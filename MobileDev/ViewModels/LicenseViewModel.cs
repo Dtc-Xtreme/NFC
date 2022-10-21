@@ -2,12 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui;
 using MobileDev.Services;
+using MobileDev.Views;
 using PetanqueCL.Models;
 using PetanqueCL.Repositories;
 using Plugin.NFC;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,12 +26,9 @@ namespace MobileDev.ViewModels
         private int pageSize = 40;
 
         private bool split;
-        private int? number = null;
         private bool nfcAvailable = true;
         private GridLength columnWidth;
-        private ObservableCollection<int> numberList;
-        private List<int> ints = new List<int>();
-        private List<License> licenses = new List<License>();
+        private License? selectedLicense = null;
         private ObservableCollection<License> licensesList = new ObservableCollection<License>();
 
         public LicenseViewModel(IAlertService alert, ILicenseRepository repo)
@@ -38,14 +37,7 @@ namespace MobileDev.ViewModels
             this.repository = repo;
             DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
             CheckOrientation();
-
-            ints = new List<int>();
-            for (int x = 0; x < 1000; x++)
-            {
-                ints.Add(x);
-            }
-
-            NumberList = new ObservableCollection<int>(ints.Take(pageSize));
+            LicensesList.Add(new License());
             //licenses = repository.Licenses.ToList();
             //LicensesList = new ObservableCollection<License>(licenses.Take(pageSize));
         }
@@ -57,19 +49,6 @@ namespace MobileDev.ViewModels
             {
                 split = value;
                 OnPropertyChanged();
-            }
-        }
-        public int? Number
-        {
-            get { return number; }
-            set
-            {
-                number = value;
-                OnPropertyChanged();
-                if (orientation == DisplayOrientation.Portrait)
-                {
-                    Navigate();
-                }
             }
         }
         public bool NFCAvailable
@@ -90,16 +69,17 @@ namespace MobileDev.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<int> NumberList
+        public License? SelectedLicense
         {
-            get
-            {
-                return numberList;
-            }
+            get { return selectedLicense; }
             set
             {
-                numberList = value;
+                selectedLicense = value;
                 OnPropertyChanged();
+                if (orientation == DisplayOrientation.Portrait)
+                {
+                    Navigate();
+                }
             }
         }
         public ObservableCollection<License> LicensesList
@@ -125,17 +105,21 @@ namespace MobileDev.ViewModels
         [RelayCommand]
         private void LoadMoreData()
         {
-            int counter = NumberList.Count();
-            var a = new ObservableCollection<int>(ints.Skip(counter).Take(pageSize));
-            foreach (var x in a)
-            {
-                NumberList.Add(x);
-            }
+            //int counter = NumberList.Count();
+            //var a = new ObservableCollection<int>(ints.Skip(counter).Take(pageSize));
+            //foreach (var x in a)
+            //{
+            //    NumberList.Add(x);
+            //}
         }
 
-        private async Task Navigate()
+        private async void Navigate()
         {
-            await Shell.Current.GoToAsync($"//License/Detail?Number={Number}"); 
+            var args = new Dictionary<string, object>
+            {
+                {"SelectedLicense", SelectedLicense}
+            };
+            await Shell.Current.GoToAsync(nameof(LicenseDetailPage), args); 
         }
 
         private void CheckOrientation()
@@ -162,7 +146,7 @@ namespace MobileDev.ViewModels
         }
 
 
-
+        
         //#####//
         // NFC //
         //#####//
@@ -270,10 +254,22 @@ namespace MobileDev.ViewModels
             }
             else
             {
-                var first = tagInfo.Records[0];
-                await alertService.ShowAlertAsync(title, GetMessage(first));
+                //var first = tagInfo.Records[0];
+                //await alertService.ShowAlertAsync(title, GetMessage(first));
                 //await ShowAlert(GetMessage(first), title);
+
+                License lic = new License();
+                lic.Nr = int.Parse(tagInfo.Records[0].Message.Substring(7));
+                string[] name = tagInfo.Records[1].Message.Split(" ");
+                lic.FirstName = name[0];
+                lic.LastName = name[1];
+                lic.BirthDate = DateTime.ParseExact(tagInfo.Records[2].Message, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                Club club = new Club();
+                club.Id = int.Parse(tagInfo.Records[0].Message.Substring(3, 3));
+                lic.Club = club;
+                SelectedLicense = lic;
             }
+
         }
 
         /// <summary>

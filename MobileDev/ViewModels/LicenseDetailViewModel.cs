@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PetanqueCL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,19 @@ using System.Threading.Tasks;
 
 namespace MobileDev.ViewModels
 {
-    [QueryProperty("Number", "Number")]
+    [QueryProperty(nameof(SelectedLicense), "SelectedLicense")]
     public partial class LicenseDetailViewModel : BaseViewModel
     {
-        [ObservableProperty]
-        private int number;
+        private License selectedlicense;
+
+        public License SelectedLicense
+        {
+            get { return selectedlicense; }
+            set
+            {
+                selectedlicense = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

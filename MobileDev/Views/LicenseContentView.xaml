@@ -3,6 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDev.Views.LicenseContentView" BackgroundColor="DarkCyan">
     <VerticalStackLayout>
-        <Label Text="{Binding Number}"></Label>
+        <!--<Label Text="{Binding Number}"></Label>-->
+        <Label Text="{Binding SelectedLicense.Nr}"></Label>
+        <Label Text="{Binding SelectedLicense.FirstName}"></Label>
+        <Label Text="{Binding SelectedLicense.LastName}"></Label>
+        <Label Text="{Binding SelectedLicense.BirthDate}"></Label>
+        <!--<Label Text="{Binding License.Gender}"></Label>-->
+        <Label Text="{Binding SelectedLicense.Club.Id}"></Label>
     </VerticalStackLayout>
 </ContentView>
