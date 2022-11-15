@@ -30,7 +30,7 @@ namespace PetanqueCL.Models
         private string prefix;
 
         [ObservableProperty]
-        private byte[]? image;
+        private string? image;
 
         public Federation()
         {

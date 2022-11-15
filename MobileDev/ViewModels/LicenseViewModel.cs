@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel.Communication;
 using MobileDev.Services;
 using MobileDev.Views;
 using PetanqueCL.Models;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -38,6 +40,7 @@ namespace MobileDev.ViewModels
             DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
             CheckOrientation();
             LicensesList.Add(new License());
+            GetAPI();
             //licenses = repository.Licenses.ToList();
             //LicensesList = new ObservableCollection<License>(licenses.Take(pageSize));
         }
@@ -462,6 +465,21 @@ namespace MobileDev.ViewModels
             }
 
             return message;
+        }
+
+        private async void GetAPI()
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = await client.GetAsync("https://api.dtc-xtreme.net/License");
+                response.EnsureSuccessStatusCode();
+                LicensesList = await response.Content.ReadFromJsonAsync<ObservableCollection<License>>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Errors: " + ex.Message);
+            }
         }
     }
 }

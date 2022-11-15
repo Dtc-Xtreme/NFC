@@ -1,4 +1,5 @@
-﻿using PetanqueCL.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PetanqueCL.Models;
 
 namespace Repositories.SeedData
 {
@@ -134,7 +135,6 @@ namespace Repositories.SeedData
                         Gender = male,
                         Club = boekt,
                         Disqualified = false,
-                        Image = "stevenk.jpg",
                         Active = true
                     },
                     fraK = new License
@@ -146,7 +146,6 @@ namespace Repositories.SeedData
                         Gender = male,
                         Club = boekt,
                         Disqualified = false,
-                        Image = "fransk.jpg",
                         Active = false
                     }
                 );

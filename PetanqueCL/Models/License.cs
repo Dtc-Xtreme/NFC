@@ -39,7 +39,7 @@ namespace PetanqueCL.Models
         private Gender gender;
 
         [ObservableProperty]
-        private string? image;
+        private byte[]? image;
 
         [ObservableProperty]
         private Club? club;
@@ -63,39 +63,40 @@ namespace PetanqueCL.Models
         {
             get { return FirstName + " " + LastName; }
         }
+
         public override bool Equals(object? obj)
         {
             return obj is License license &&
-                   FullName == license.FullName &&
-                   Id == license.Id &&
-                   Nr == license.Nr &&
-                   FirstName == license.FirstName &&
-                   LastName == license.LastName &&
-                   BirthDate == license.BirthDate &&
-                   EqualityComparer<Gender>.Default.Equals(Gender, license.Gender) &&
-                   Image == license.Image &&
-                   EqualityComparer<Club?>.Default.Equals(Club, license.Club) &&
-                   Disqualified == license.Disqualified &&
-                   Description == license.Description &&
-                   Active == license.Active;
+                   id == license.id &&
+                   nr == license.nr &&
+                   firstName == license.firstName &&
+                   lastName == license.lastName &&
+                   birthDate == license.birthDate &&
+                   EqualityComparer<Gender>.Default.Equals(gender, license.gender) &&
+                   EqualityComparer<byte[]?>.Default.Equals(image, license.image) &&
+                   EqualityComparer<Club?>.Default.Equals(club, license.club) &&
+                   disqualified == license.disqualified &&
+                   description == license.description &&
+                   active == license.active;
         }
+
         public override int GetHashCode()
         {
             HashCode hash = new HashCode();
-            hash.Add(FullName);
-            hash.Add(Id);
-            hash.Add(Nr);
-            hash.Add(FirstName);
-            hash.Add(LastName);
-            hash.Add(BirthDate);
-            hash.Add(Gender);
-            hash.Add(Image);
-            hash.Add(Club);
-            hash.Add(Disqualified);
-            hash.Add(Description);
-            hash.Add(Active);
+            hash.Add(id);
+            hash.Add(nr);
+            hash.Add(firstName);
+            hash.Add(lastName);
+            hash.Add(birthDate);
+            hash.Add(gender);
+            hash.Add(image);
+            hash.Add(club);
+            hash.Add(disqualified);
+            hash.Add(description);
+            hash.Add(active);
             return hash.ToHashCode();
         }
+
         public override string ToString()
         {
             return nr + " " + FullName;

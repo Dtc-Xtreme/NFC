@@ -59,6 +59,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Repositories\**" />
+	  <Compile Remove="Repositories\**" />
+	  <EmbeddedResource Remove="Repositories\**" />
+	  <MauiCss Remove="Repositories\**" />
+	  <MauiXaml Remove="Repositories\**" />
+	  <None Remove="Repositories\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	  <None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
 	  <None Remove="Resources\Icons\home_black.png" />
@@ -71,6 +80,8 @@
 	  <None Remove="Resources\Icons\score_white.png" />
 	  <None Remove="Resources\Icons\settings_black.png" />
 	  <None Remove="Resources\Icons\settings_white.png" />
+	  <None Remove="Resources\Images\no_image.png" />
+	  <None Remove="Resources\Images\pclier.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -143,10 +154,6 @@
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Translation.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Repositories\" />
 	</ItemGroup>
 
 	<ItemGroup>

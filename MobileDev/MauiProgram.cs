@@ -90,6 +90,8 @@ public static class MauiProgram
         builder.Services.AddSingleton(typeof(IFingerprint), CrossFingerprint.Current);
         builder.Services.AddSingleton<IAlertService, AlertService>();
 
+        //builder.Services.AddSingleton<TestRepository>();
+
         builder.Services.AddTransient<PetanqueDbContext>();
         builder.Services.AddTransient<IPetanqueRepository, EFPetanqueRepository>();
         builder.Services.AddTransient<IGenderRepository, EFGenderRepository>();
@@ -110,6 +112,8 @@ public static class MauiProgram
         builder.Services.AddTransient<LicenseContentView>();
         builder.Services.AddTransient<LicenseDetailPage>();
         builder.Services.AddTransient<LicenseDetailViewModel>();
+
+        var serv = builder.Services.BuildServiceProvider();
 
         return builder.Build();
 	}

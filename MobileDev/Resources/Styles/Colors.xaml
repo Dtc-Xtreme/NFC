@@ -52,5 +52,5 @@
     <FileImageSource x:Key="SettingsBlack" File="settings_black.png"/>
     <FileImageSource x:Key="SettingsWhite" File="settings_white.png"/>
 
-
+    <FileImageSource x:Key="NoImage" File="no_image.png"/>
 </ResourceDictionary>
