@@ -23,17 +23,17 @@
 
             <HorizontalStackLayout IsVisible="{Binding IsVisible}" Margin="0,15">
                 <Frame BorderColor="Transparent" CornerRadius="100" Padding="0" HeightRequest="120" WidthRequest="120" Margin="20,0" BackgroundColor="#EEEEEE">
-                    <Image Source="{Binding SelectedLicense.Club.Federation.Image}"/>
+                    <Image Source="{Binding SelectedLicense.Club.Province.Federation.Image}"/>
                     <!--<Image Source="{Binding SelectedLicense.Club.Federation.Image, Converter={StaticResource ByteArrayToBitmapImageConverter}}" TargetNullValue={StaticResource NoImage}}"/>-->
                 </Frame>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Start">
                     <StackLayout>
                         <Label Text="Federation" FontAttributes="Bold"/>
-                        <Label Text="{Binding SelectedLicense.Club.Federation.Name}"/>
+                        <Label Text="{Binding SelectedLicense.Club.Province.Federation.Name}"/>
                     </StackLayout>
                     <StackLayout Margin="0,10">
                         <Label Text="Prefix" FontAttributes="Bold"/>
-                        <Label Text="{Binding SelectedLicense.Club.Federation.Prefix}"/>
+                        <Label Text="{Binding SelectedLicense.Club.Province.Federation.Prefix}"/>
                     </StackLayout>
                 </VerticalStackLayout>
             </HorizontalStackLayout>

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PetanqueCL.Models
@@ -14,6 +16,7 @@ namespace PetanqueCL.Models
         private bool isDirty = false;
         private bool isNew = false;
 
+  
         [NotMapped]
         public bool IsDirty
         {

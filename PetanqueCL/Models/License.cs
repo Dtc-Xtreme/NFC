@@ -101,5 +101,12 @@ namespace PetanqueCL.Models
         {
             return nr + " " + FullName;
         }
+
+        public string FullLicenseNr
+        {
+            get {
+                return this.Club.Province.Id.ToString("D3") + "-" + this.Club.Id.ToString("D2") + "-" + this.Nr.ToString("D5");
+            }
+        }
     }
 }
