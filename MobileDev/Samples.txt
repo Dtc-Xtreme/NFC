@@ -3,3 +3,6 @@ Application.Current.UserAppTheme == AppTheme.Dark
 Application.Current.UserAppTheme == AppTheme.Unspecified
 
 SQLServerManager15.msc
+
+    //            ImageSource image = ImageSource.FromStream(() => new MemoryStream(value as byte[]));
+    //            return image;

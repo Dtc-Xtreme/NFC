@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetanqueCL.Models;
 using System.Globalization;
+using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WebAPI.Controllers
@@ -220,7 +221,9 @@ namespace WebAPI.Controllers
             License? lic = Licenses.FirstOrDefault(c => c.Id == id);
             if (lic != null)
             {
-                return Ok(lic);
+                JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions();
+                jsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                return Json(lic, jsonSerializerOptions);
             }
             else
             {

@@ -20,18 +20,6 @@
             <ColumnDefinition Width="{Binding ColumnWidth}"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <!--<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <CheckBox x:Name="ChkReadOnly"
-                                  IsChecked="False"
-                                  IsEnabled="{Binding NfcIsEnabled}"
-                                  VerticalOptions="Center"
-                                  Color="Red" />
-
-            <Label FontAttributes="Bold"
-                               Text="Make Tag Read-Only"
-                               TextColor="Red"
-                               VerticalOptions="Center" />
-        </StackLayout>-->
         <v:LicenseSearchView Grid.Row="0" Grid.Column="0"/>
         <v:LicenseContentView Grid.Row="0" Grid.Column="1" IsVisible="{Binding Split, Mode=TwoWay}"/>
     </Grid>

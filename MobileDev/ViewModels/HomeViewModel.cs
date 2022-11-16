@@ -18,6 +18,7 @@ using System.Net.Http.Json;
 using Repositories.SeedData;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories;
+using MobileDev.Services;
 
 namespace MobileDev.ViewModels
 {
@@ -26,17 +27,23 @@ namespace MobileDev.ViewModels
         private IConfiguration configuration;
         private ITranslator translator;
         private IServiceProvider serviceProvider;
+        private IAlertService alertService;
+        private readonly IFingerprint fingerprint;
         private List<CalendarItem> items;
         private bool isRefreshing = false;
+        private bool auth = false;
 
-        public HomeViewModel(IConfiguration conf, ITranslator trans, IServiceProvider serv)
+        public HomeViewModel(IConfiguration conf, ITranslator trans, IServiceProvider serv, IFingerprint fingerprint, IAlertService alert)
         {
             // Check  theme and languages setting when started.
             this.configuration = conf;
             this.translator = trans;
             this.serviceProvider = serv;
+            this.fingerprint = fingerprint;
+            this.alertService = alert;
 
-            if(DeviceInfo.Current.Platform == DevicePlatform.WinUI)
+
+            if (DeviceInfo.Current.Platform == DevicePlatform.WinUI)
             {
                 // fill database with data
                 SeedData.EnsurePopulated(serviceProvider.GetService<PetanqueDbContext>());
@@ -76,6 +83,16 @@ namespace MobileDev.ViewModels
             }
         }
 
+        public bool Auth
+        {
+            get { return auth; }
+            set
+            {
+                auth = value;
+                OnPropertyChanged();
+            }
+        }
+
         [RelayCommand]
         private async void GetAPI()
         {
@@ -86,10 +103,26 @@ namespace MobileDev.ViewModels
                 response.EnsureSuccessStatusCode();
                 Items = await response.Content.ReadFromJsonAsync<List<CalendarItem>>();
                 IsRefreshing = false;
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 //
                 Console.WriteLine("Errors: " + ex.Message);
+            }
+        }
+
+        [RelayCommand]
+        private async void Biometric()
+        {
+            var request = new AuthenticationRequestConfiguration("Validate that you have fingers", "Because without them you will not be able to access");
+            var result = await fingerprint.AuthenticateAsync(request);
+            if (result.Authenticated)
+            {
+                Auth = true;
+                await alertService.ShowAlertAsync("Authenticate!", "Access Granted", "OK");
+            }
+            else
+            {
+                await alertService.ShowAlertAsync("Unauthenticated", "Access Denied", "OK");
             }
         }
     }

@@ -92,13 +92,13 @@ public static class MauiProgram
 
         //builder.Services.AddSingleton<TestRepository>();
 
-        builder.Services.AddTransient<PetanqueDbContext>();
-        builder.Services.AddTransient<IPetanqueRepository, EFPetanqueRepository>();
-        builder.Services.AddTransient<IGenderRepository, EFGenderRepository>();
-        builder.Services.AddTransient<IFederationRepository, EFFederationRepository>();
-        builder.Services.AddTransient<IProvinceRepository, EFProvinceRepository>();
-        builder.Services.AddTransient<IClubRepository, EFClubRepository>();
-        builder.Services.AddTransient<ILicenseRepository, EFLicenseRepository>();
+        //builder.Services.AddTransient<PetanqueDbContext>();
+        //builder.Services.AddTransient<IPetanqueRepository, EFPetanqueRepository>();
+        //builder.Services.AddTransient<IGenderRepository, EFGenderRepository>();
+        //builder.Services.AddTransient<IFederationRepository, EFFederationRepository>();
+        //builder.Services.AddTransient<IProvinceRepository, EFProvinceRepository>();
+        //builder.Services.AddTransient<IClubRepository, EFClubRepository>();
+        //builder.Services.AddTransient<ILicenseRepository, EFLicenseRepository>();
 
         builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<HomeViewModel>();

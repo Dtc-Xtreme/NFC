@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:MobileDev.Converters"
              x:Class="MobileDev.Views.LicenseContentView" BackgroundColor="LightGray">
-
     <ContentView.Resources>
-        <converters:ByteArrayToBitmapImageConverter x:Name="ImageConverter" x:Key="ByteArrayToBitmapImageConverter"/>
+        <converters:ByteArrayToImageSourceConverter x:Key="ImageConverter"/>
     </ContentView.Resources>
     
     <ScrollView>
@@ -58,7 +57,7 @@
             <!--License-->
             <HorizontalStackLayout IsVisible="{Binding IsVisible}" Margin="0,15">
                 <Frame BorderColor="Transparent" CornerRadius="100" Padding="0" HeightRequest="120" WidthRequest="120" Margin="20,0" BackgroundColor="#EEEEEE">
-                    <Image Source="{Binding SelectedLicense.Image}"/>
+                    <Image Source="{Binding SelectedLicense.Image, Converter={StaticResource ImageConverter}}"/>
                 </Frame>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Start">
                     <HorizontalStackLayout Margin="0,0,0,2">

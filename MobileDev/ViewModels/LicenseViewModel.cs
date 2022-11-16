@@ -9,9 +9,12 @@ using PetanqueCL.Repositories;
 using Plugin.NFC;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using System.Net.Http.Json;
+using PetanqueCL.Models;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 
 
 namespace MobileDev.ViewModels
@@ -19,26 +22,23 @@ namespace MobileDev.ViewModels
     public partial class LicenseViewModel : BaseViewModel
     {
         private IAlertService alertService;
-        private ILicenseRepository repository;
         private DisplayOrientation orientation;
-        private int pageSize = 40;
+        private int pageSize = 2;
 
         private bool split;
         private bool nfcAvailable = true;
         private GridLength columnWidth;
         private License? selectedLicense = null;
-        private ObservableCollection<License> licensesList = new ObservableCollection<License>();
+        private string searchText;
+        private List<License> licenses;
+        private ObservableCollection<License> searchResults;
 
-        public LicenseViewModel(IAlertService alert, ILicenseRepository repo)
+        public LicenseViewModel(IAlertService alert)
         {
             this.alertService = alert;
-            this.repository = repo;
             DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
             CheckOrientation();
-            LicensesList.Add(new License());
             GetAPI();
-            //licenses = repository.Licenses.ToList();
-            //LicensesList = new ObservableCollection<License>(licenses.Take(pageSize));
         }
 
         public bool Split
@@ -81,15 +81,30 @@ namespace MobileDev.ViewModels
                 }
             }
         }
-        public ObservableCollection<License> LicensesList
+        public string SearchText
         {
-            get
-            {
-                return licensesList;
-            }
+            get { return this.searchText; }
             set
             {
-                licensesList = value;
+                this.searchText = value;
+                OnPropertyChanged();
+            }
+        }
+        public List<License> Licenses
+        {
+            get { return this.licenses; }
+            set
+            {
+                this.licenses = value;
+                OnPropertyChanged();
+            }
+        }
+        public ObservableCollection<License> SearchResults
+        {
+            get { return this.searchResults; }
+            set
+            {
+                this.searchResults = value;
                 OnPropertyChanged();
             }
         }
@@ -104,12 +119,36 @@ namespace MobileDev.ViewModels
         [RelayCommand]
         private void LoadMoreData()
         {
-            //int counter = NumberList.Count();
-            //var a = new ObservableCollection<int>(ints.Skip(counter).Take(pageSize));
-            //foreach (var x in a)
-            //{
-            //    NumberList.Add(x);
-            //}
+            int counter = SearchResults.Count();
+            if(counter < Licenses.Count())
+            {
+                var a = new ObservableCollection<License>(Licenses.Skip(counter).Take(pageSize));
+                foreach (var x in a)
+                {
+                    SearchResults.Add(x);
+                }
+            }
+        }
+
+        [RelayCommand]
+        private void Search()
+        {
+            int numeric;
+            bool isNumeric = int.TryParse(SearchText, out numeric);
+            if (isNumeric)
+            {
+                SearchResults = new ObservableCollection<License>();
+                SearchResults.Add(Licenses.FirstOrDefault(x => x.Nr == numeric));
+            }
+            else
+            {
+                SearchResults = new ObservableCollection<License>(Licenses.Where(c => c.FirstName.ToLower().Contains(SearchText.ToLower()) || c.LastName.ToLower().Contains(SearchText.ToLower())));
+            }
+
+            if (SearchResults.Count == 1)
+            {
+                SelectedLicense = SearchResults.First();
+            }
         }
 
         private async void Navigate()
@@ -253,22 +292,11 @@ namespace MobileDev.ViewModels
             }
             else
             {
-                //var first = tagInfo.Records[0];
-                //await alertService.ShowAlertAsync(title, GetMessage(first));
-                //await ShowAlert(GetMessage(first), title);
+                JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions();
+                jsonSerializerOptions.PropertyNameCaseInsensitive = true;
 
                 string json = tagInfo.Records[0].Message;
-                var License = JsonSerializer.Deserialize<License>(json);
-
-                License lic = new License();
-                lic.Nr = int.Parse(tagInfo.Records[0].Message.Substring(7));
-                string[] name = tagInfo.Records[1].Message.Split(" ");
-                lic.FirstName = name[0];
-                lic.LastName = name[1];
-                lic.BirthDate = DateTime.ParseExact(tagInfo.Records[2].Message, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                Club club = new Club();
-                club.Id = int.Parse(tagInfo.Records[0].Message.Substring(3, 3));
-                lic.Club = club;
+                License lic = JsonSerializer.Deserialize<License>(json, jsonSerializerOptions);
                 SelectedLicense = lic;
             }
 
@@ -473,7 +501,9 @@ namespace MobileDev.ViewModels
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.GetAsync("https://api.dtc-xtreme.net/License");
                 response.EnsureSuccessStatusCode();
-                LicensesList = await response.Content.ReadFromJsonAsync<ObservableCollection<License>>();
+                Licenses = new List<License>();
+                Licenses = await response.Content.ReadFromJsonAsync<List<License>>();
+                SearchResults = new ObservableCollection<License>(Licenses.Take(pageSize));
             }
             catch (Exception ex)
             {

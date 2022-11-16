@@ -4,22 +4,23 @@
              x:Class="MobileDev.Views.HomePage"
              xmlns:v="clr-namespace:MobileDev.Views"
              xmlns:vm="clr-namespace:MobileDev.ViewModels"
-             xmlns:con="clr-namespace:MobileDev.Converters"
+             xmlns:converters="clr-namespace:MobileDev.Converters"
              xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
              Title="Home">
-
+    <ContentPage.Resources>
+        <converters:FlipBoleanConverter x:Key="FlipBoleanConverter"/>
+    </ContentPage.Resources>
 
     <StackLayout>
         <Label FontAttributes="Bold" FontSize="20" Text="{multilanguage:Translation Key=WelcomeText}" Padding="20"/>
-        <RefreshView Command="{Binding GetAPICommand}" IsRefreshing="{Binding IsRefreshing}">
+        <RefreshView Command="{Binding GetAPICommand}" IsRefreshing="{Binding IsRefreshing}" IsEnabled="{Binding Auth}" IsVisible="{Binding Auth}">
             <ListView ItemsSource="{Binding Items, Mode=TwoWay}"/>
         </RefreshView>
-    </StackLayout>
-</ContentPage>
-
-<!--<Button
+        <Button
           Text="Authenticate"
           FontAttributes="Bold"
           SemanticProperties.Hint="Click to authenticate with your fingerprint"
-          Clicked="OnBiometricClicked"
-          HorizontalOptions="Center" />-->
+          Command="{Binding BiometricCommand}"
+          HorizontalOptions="Center" IsEnabled="{Binding Auth, Converter={StaticResource FlipBoleanConverter}}" IsVisible="{Binding Auth, Converter={StaticResource FlipBoleanConverter}}"/>
+    </StackLayout>
+</ContentPage>

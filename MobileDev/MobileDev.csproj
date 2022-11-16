@@ -93,11 +93,14 @@
 	<ItemGroup>
 	  <PackageReference Include="banditoth.MAUI.Multilanguage" Version="1.0.4" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
-	<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0-rc.1.22426.10" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0-rc.1.22426.10" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 	  <PackageReference Include="Plugin.Fingerprint" Version="3.0.0-beta.1" />
 	  <PackageReference Include="Plugin.NFC" Version="0.1.26" />
-	  <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PetanqueCL\PetanqueCL.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -155,10 +158,6 @@
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Translation.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\PetanqueCL\PetanqueCL.csproj" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMobileDevHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionMobileDevHideInfoBar="True" /></VisualStudio></ProjectExtensions>

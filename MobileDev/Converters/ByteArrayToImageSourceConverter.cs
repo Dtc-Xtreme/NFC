@@ -7,20 +7,12 @@ using System.Threading.Tasks;
 
 namespace MobileDev.Converters
 {
-    public class ByteArrayToBitmapImageConverter : IValueConverter
+    public class ByteArrayToImageSourceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null)
-            {
-                ImageSource imageSource;
-                //return (BitmapSource)new ImageSourceConverter().ConvertFrom(value);
-                return null;
-            }
-            else
-            {
-                return null;
-            }
+            ImageSource image = ImageSource.FromStream(() => new MemoryStream(value as byte[]));
+            return image;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

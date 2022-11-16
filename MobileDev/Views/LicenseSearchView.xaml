@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:MobileDev.Converters"
              x:Class="MobileDev.Views.LicenseSearchView">
+    <ContentView.Resources>
+        <converters:ByteArrayToImageSourceConverter x:Key="ImageConverter"/>
+    </ContentView.Resources>
+       
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -12,11 +17,25 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <SearchBar Grid.Column="0" Placeholder="Search"/>
+            <SearchBar Grid.Row="0" Grid.Column="0" SearchCommand="{Binding SearchCommand}" Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search" HorizontalOptions="StartAndExpand"/>
             <ImageButton Grid.Column="1" HorizontalOptions="End" Padding="5" Source="{AppThemeBinding Light={StaticResource Key=NFCBlack}, Dark={StaticResource Key=NFCWhite}}" Command="{Binding NfcCommand}" IsEnabled="{Binding NFCAvailable}"/>
         </Grid>
-        <CollectionView Grid.Row="1" VerticalOptions="FillAndExpand" ItemsSource="{Binding LicensesList, Mode=TwoWay}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}" ItemsUpdatingScrollMode="KeepItemsInView" SelectedItem="{Binding SelectedLicense, Mode=TwoWay}" SelectionMode="Single">
-            
+        <CollectionView Grid.Row="1" VerticalOptions="FillAndExpand" ItemsSource="{Binding SearchResults, Mode=TwoWay}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}" ItemsUpdatingScrollMode="KeepItemsInView" SelectedItem="{Binding SelectedLicense, Mode=TwoWay}" SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="{Binding Image, Converter={StaticResource ImageConverter}}" HeightRequest="50"/>
+                        <Label Grid.Column="1" Text="{Binding FullName}" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
 </ContentView>
