@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MobileDev.ViewModels"
              xmlns:converters="clr-namespace:MobileDev.Converters"
              xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
-             Title="Home">
+             Title="{multilanguage:Translation Key=Home}">
     <ContentPage.Resources>
         <converters:FlipBoleanConverter x:Key="FlipBoleanConverter"/>
     </ContentPage.Resources>
@@ -17,7 +17,7 @@
             <ListView ItemsSource="{Binding Items, Mode=TwoWay}"/>
         </RefreshView>
         <Button
-          Text="Authenticate"
+          Text="{multilanguage:Translation Key=Authenticate}"
           FontAttributes="Bold"
           SemanticProperties.Hint="Click to authenticate with your fingerprint"
           Command="{Binding BiometricCommand}"

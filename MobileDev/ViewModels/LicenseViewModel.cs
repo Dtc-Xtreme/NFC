@@ -23,15 +23,16 @@ namespace MobileDev.ViewModels
     {
         private IAlertService alertService;
         private DisplayOrientation orientation;
-        private int pageSize = 2;
+        private int pageSize = 5;
 
         private bool split;
         private bool nfcAvailable = true;
         private GridLength columnWidth;
         private License? selectedLicense = null;
         private string searchText;
-        private List<License> licenses;
-        private ObservableCollection<License> searchResults;
+        private List<License> licenses = new List<License>();
+        private ObservableCollection<License> searchResults = new ObservableCollection<License>();
+        private ObservableCollection<License> showResults = new ObservableCollection<License>();
 
         public LicenseViewModel(IAlertService alert)
         {
@@ -106,6 +107,16 @@ namespace MobileDev.ViewModels
             {
                 this.searchResults = value;
                 OnPropertyChanged();
+                LoadMoreData();
+            }
+        }
+        public ObservableCollection<License> ShowResults
+        {
+            get { return this.showResults; }
+            set
+            {
+                this.showResults = value;
+                OnPropertyChanged();
             }
         }
 
@@ -119,13 +130,13 @@ namespace MobileDev.ViewModels
         [RelayCommand]
         private void LoadMoreData()
         {
-            int counter = SearchResults.Count();
-            if(counter < Licenses.Count())
+            int counter = ShowResults.Count();
+            if (counter < SearchResults.Count())
             {
-                var a = new ObservableCollection<License>(Licenses.Skip(counter).Take(pageSize));
+                var a = new ObservableCollection<License>(SearchResults.Skip(counter).Take(pageSize));
                 foreach (var x in a)
                 {
-                    SearchResults.Add(x);
+                    ShowResults.Add(x);
                 }
             }
         }
@@ -138,17 +149,21 @@ namespace MobileDev.ViewModels
             if (isNumeric)
             {
                 SearchResults = new ObservableCollection<License>();
+                ShowResults = new ObservableCollection<License>();
                 SearchResults.Add(Licenses.FirstOrDefault(x => x.Nr == numeric));
+                ShowResults = SearchResults;
             }
             else
             {
+                SearchResults = new ObservableCollection<License>();
+                ShowResults = new ObservableCollection<License>();
                 SearchResults = new ObservableCollection<License>(Licenses.Where(c => c.FirstName.ToLower().Contains(SearchText.ToLower()) || c.LastName.ToLower().Contains(SearchText.ToLower())));
             }
 
-            if (SearchResults.Count == 1)
-            {
-                SelectedLicense = SearchResults.First();
-            }
+            //if (SearchResults.Count == 1)
+            //{
+            //    SelectedLicense = ShowResults.First();
+            //}
         }
 
         private async void Navigate()
@@ -503,7 +518,8 @@ namespace MobileDev.ViewModels
                 response.EnsureSuccessStatusCode();
                 Licenses = new List<License>();
                 Licenses = await response.Content.ReadFromJsonAsync<List<License>>();
-                SearchResults = new ObservableCollection<License>(Licenses.Take(pageSize));
+                Licenses.AddRange(Licenses);
+                SearchResults = new ObservableCollection<License>(Licenses);
             }
             catch (Exception ex)
             {

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDev.Views.ScoreTrackerPage"
              xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
-             Title="Score Tracker">
+             Title="{multilanguage:Translation Key=ScoreTracker}">
     <ScrollView>
         <VerticalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center">

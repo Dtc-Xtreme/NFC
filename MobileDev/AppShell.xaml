@@ -5,22 +5,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MobileDev"
     xmlns:views="clr-namespace:MobileDev.Views"
+    xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
     FlyoutBehavior="Flyout"
     FlyoutHeaderBehavior="CollapseOnScroll" Shell.TabBarIsVisible="False">
 
-    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource HomeBlack}, Dark={StaticResource HomeWhite}}" Title="Home">
+    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource HomeBlack}, Dark={StaticResource HomeWhite}}" Title="{multilanguage:Translation Key=Home}">
         <ShellContent Title="Home" Route="Home" ContentTemplate="{DataTemplate views:HomePage}" />
     </FlyoutItem>
 
-    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource LicenseBlack}, Dark={StaticResource LicenseWhite}}" Title="License">
+    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource LicenseBlack}, Dark={StaticResource LicenseWhite}}" Title="{multilanguage:Translation Key=License}">
         <ShellContent Title="License" Route="License" ContentTemplate="{DataTemplate views:LicensePage}"/>
     </FlyoutItem>
 
-    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource ScoreBlack}, Dark={StaticResource ScoreWhite}}" Title="Score Tracker">
+    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource ScoreBlack}, Dark={StaticResource ScoreWhite}}" Title="{multilanguage:Translation Key=ScoreTracker}">
         <ShellContent Title="Score Tracker" Route="Score" ContentTemplate="{DataTemplate views:ScoreTrackerPage}"/>
     </FlyoutItem>
-    
-    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource SettingsBlack}, Dark={StaticResource SettingsWhite}}" Title="Settings">
+
+    <FlyoutItem FlyoutIcon="{AppThemeBinding Light={StaticResource SettingsBlack}, Dark={StaticResource SettingsWhite}}" Title="{multilanguage:Translation Key=Settings}">
         <ShellContent Title="Settings" Route="Settings" ContentTemplate="{DataTemplate views:SettingsPage}"/>
     </FlyoutItem>
     <!--<ShellContent Title="About" Route="About" ContentTemplate="{DataTemplate views:AboutPage}"/>-->

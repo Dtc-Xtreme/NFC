@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:MobileDev.Converters"
+             xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
              x:Class="MobileDev.Views.LicenseSearchView">
     <ContentView.Resources>
         <converters:ByteArrayToImageSourceConverter x:Key="ImageConverter"/>
@@ -17,10 +18,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <SearchBar Grid.Row="0" Grid.Column="0" SearchCommand="{Binding SearchCommand}" Text="{Binding SearchText, Mode=TwoWay}" Placeholder="Search" HorizontalOptions="StartAndExpand"/>
+            <SearchBar Grid.Row="0" Grid.Column="0" SearchCommand="{Binding SearchCommand}" Text="{Binding SearchText, Mode=TwoWay}" Placeholder="{multilanguage:Translation Key=Search}" HorizontalOptions="StartAndExpand"/>
             <ImageButton Grid.Column="1" HorizontalOptions="End" Padding="5" Source="{AppThemeBinding Light={StaticResource Key=NFCBlack}, Dark={StaticResource Key=NFCWhite}}" Command="{Binding NfcCommand}" IsEnabled="{Binding NFCAvailable}"/>
         </Grid>
-        <CollectionView Grid.Row="1" VerticalOptions="FillAndExpand" ItemsSource="{Binding SearchResults, Mode=TwoWay}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}" ItemsUpdatingScrollMode="KeepItemsInView" SelectedItem="{Binding SelectedLicense, Mode=TwoWay}" SelectionMode="Single">
+        <CollectionView Grid.Row="1" VerticalOptions="FillAndExpand" ItemsSource="{Binding ShowResults, Mode=TwoWay}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}" ItemsUpdatingScrollMode="KeepItemsInView" SelectedItem="{Binding SelectedLicense, Mode=TwoWay}" SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10">
@@ -32,7 +33,10 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Source="{Binding Image, Converter={StaticResource ImageConverter}}" HeightRequest="50"/>
-                        <Label Grid.Column="1" Text="{Binding FullName}" VerticalOptions="CenterAndExpand"/>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
+                            <Label Text="{Binding FullName}" VerticalOptions="CenterAndExpand"/>
+                            <Label Text="{Binding FullLicenseNr}" VerticalOptions="CenterAndExpand"/>
+                        </VerticalStackLayout>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

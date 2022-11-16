@@ -46,7 +46,7 @@ namespace PetanqueCL.Models
         }
         public override string ToString()
         {
-            return Id + " - " + Name;
+            return Id.ToString("D2") + " - " + Name;
         }
     }
 }

@@ -117,6 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Authenticate" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="BirthDate" xml:space="preserve">
+    <value>Geboorte datum: </value>
+  </data>
+  <data name="Club" xml:space="preserve">
+    <value>Ploeg</value>
+  </data>
+  <data name="Federation" xml:space="preserve">
+    <value>Federatie</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Licentie</value>
+  </data>
+  <data name="LicenseDetail" xml:space="preserve">
+    <value>Licentie Details</value>
+  </data>
+  <data name="LicenseNr" xml:space="preserve">
+    <value>Licentie nr: </value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Naam: </value>
+  </data>
+  <data name="Prefix" xml:space="preserve">
+    <value>Afkorting</value>
+  </data>
+  <data name="Province" xml:space="preserve">
+    <value>Provincie</value>
+  </data>
+  <data name="ScoreTracker" xml:space="preserve">
+    <value>Score Teller</value>
+  </data>
   <data name="ScoreTrackerClearResultsButton" xml:space="preserve">
     <value>Resultaten verwijderen</value>
   </data>
@@ -132,6 +168,9 @@
   <data name="ScoreTrackerVisitorLabel" xml:space="preserve">
     <value>Bezoeker</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
   <data name="SettingDarkThemeLabel" xml:space="preserve">
     <value>Donkere thema</value>
   </data>
@@ -146,6 +185,9 @@
   </data>
   <data name="SettingNFCLabel" xml:space="preserve">
     <value>NFC</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Instellingen</value>
   </data>
   <data name="SettingSensorTitle" xml:space="preserve">
     <value>Sensoren</value>

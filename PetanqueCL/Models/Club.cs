@@ -45,7 +45,7 @@ namespace PetanqueCL.Models
 
         public override string ToString()
         {
-            return Nr + " - " + Name;
+            return Nr.ToString("D3") + " - " + Name;
         }
         public override bool Equals(object? obj)
         {

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileDev.Views.SettingsPage"
              xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
-             Title="Settings">
+             Title="{multilanguage:Translation Key=Settings}">
     <ScrollView>
         <Grid VerticalOptions="Start">
             <Grid.RowDefinitions>

@@ -5,7 +5,8 @@
              xmlns:v="clr-namespace:MobileDev.Views"
              xmlns:vm="clr-namespace:MobileDev.ViewModels"
              xmlns:con="clr-namespace:MobileDev.Converters"
-             Title="License">
+             xmlns:multilanguage="clr-namespace:banditoth.MAUI.Multilanguage;assembly=banditoth.MAUI.Multilanguage"
+             Title="{multilanguage:Translation Key=License}">
     <ContentPage.Resources>
         <con:FlipBoleanConverter x:Key="FlipBolean"></con:FlipBoleanConverter>
     </ContentPage.Resources>
