@@ -200,9 +200,9 @@ namespace WebAPI.Controllers
         };
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            if(Licenses != null && Licenses.Length > 0)
+            if (Licenses.Length != 0 && Licenses != null)
             {
                 return Ok(Licenses.ToList());
 
@@ -211,6 +211,22 @@ namespace WebAPI.Controllers
             {
                 return NotFound();
             }
+        }
+
+
+        [HttpGet("{id}")]
+        public IActionResult GetLicenceById(int id)
+        {
+            License? lic = Licenses.FirstOrDefault(c => c.Id == id);
+            if (lic != null)
+            {
+                return Ok(lic);
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
 
         private static byte[] ImageToByteArray(string fileName)
