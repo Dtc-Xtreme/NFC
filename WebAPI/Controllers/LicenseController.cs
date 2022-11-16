@@ -202,7 +202,15 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(Licenses.ToList());
+            if(Licenses != null && Licenses.Length > 0)
+            {
+                return Ok(Licenses.ToList());
+
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         private static byte[] ImageToByteArray(string fileName)

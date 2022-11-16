@@ -63,7 +63,6 @@ namespace PetanqueCL.Models
         {
             get { return FirstName + " " + LastName; }
         }
-
         public override bool Equals(object? obj)
         {
             return obj is License license &&
@@ -79,7 +78,6 @@ namespace PetanqueCL.Models
                    description == license.description &&
                    active == license.active;
         }
-
         public override int GetHashCode()
         {
             HashCode hash = new HashCode();
@@ -96,12 +94,10 @@ namespace PetanqueCL.Models
             hash.Add(active);
             return hash.ToHashCode();
         }
-
         public override string ToString()
         {
             return nr + " " + FullName;
         }
-
         public string FullLicenseNr
         {
             get {

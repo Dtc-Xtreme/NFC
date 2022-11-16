@@ -7,17 +7,12 @@ using MobileDev.Views;
 using PetanqueCL.Models;
 using PetanqueCL.Repositories;
 using Plugin.NFC;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Xml;
-using Encoding = System.Text.Encoding;
+
 
 namespace MobileDev.ViewModels
 {
@@ -262,17 +257,18 @@ namespace MobileDev.ViewModels
                 //await alertService.ShowAlertAsync(title, GetMessage(first));
                 //await ShowAlert(GetMessage(first), title);
 
-                License lic = JsonSerializer.Deserialize<License>(tagInfo.Records[0].Message);
+                string json = tagInfo.Records[0].Message;
+                var License = JsonSerializer.Deserialize<License>(json);
 
-                //License lic = new License();
-                //lic.Nr = int.Parse(tagInfo.Records[0].Message.Substring(7));
-                //string[] name = tagInfo.Records[1].Message.Split(" ");
-                //lic.FirstName = name[0];
-                //lic.LastName = name[1];
-                //lic.BirthDate = DateTime.ParseExact(tagInfo.Records[2].Message, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                //Club club = new Club();
-                //club.Id = int.Parse(tagInfo.Records[0].Message.Substring(3, 3));
-                //lic.Club = club;
+                License lic = new License();
+                lic.Nr = int.Parse(tagInfo.Records[0].Message.Substring(7));
+                string[] name = tagInfo.Records[1].Message.Split(" ");
+                lic.FirstName = name[0];
+                lic.LastName = name[1];
+                lic.BirthDate = DateTime.ParseExact(tagInfo.Records[2].Message, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                Club club = new Club();
+                club.Id = int.Parse(tagInfo.Records[0].Message.Substring(3, 3));
+                lic.Club = club;
                 SelectedLicense = lic;
             }
 
