@@ -15,7 +15,7 @@ AppShell.xaml.cs
   -> Routes
 
 Vereisten:
- => Uiteraard beschikt jouw app over een aantal niet-triviale schermen (minstens 3) die elk de nodige UI elementen bevatten (labels, knoppen, afbeeldingen)
+ -> Uiteraard beschikt jouw app over een aantal niet-triviale schermen (minstens 3) die elk de nodige UI elementen bevatten (labels, knoppen, afbeeldingen)
     -> Home
        => Als je inlogd via vingerafdruk krijg je de calender te zien en als er een error is met de api call krijg je een popup met de error (dit is van toepassing voor alle API calls).
        => De list van de CalendarItems kan je refreshen door te scrollen.
