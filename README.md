@@ -37,8 +37,8 @@ Vereisten:
        => Deze settings worden in een json file opgeslagen op het device. En worden opnieuw ingeladen bij het opstarten.
 
 Extra's:
- => FingerPrint Auth.
- => NFC: Lezen van NFC kaart.
- => LocalNotification: Push notificatie naar je android.
- => Connectivity: Controleren of er internet beschikbaar is (je kan hier ook checken op welke hardware: bluethoot, wifi of celluar).
- => IAlert: Implementatie van Popups in de app.
+ -> FingerPrint Auth.
+ -> NFC: Lezen van NFC kaart.
+ -> LocalNotification: Push notificatie naar je android.
+ -> Connectivity: Controleren of er internet beschikbaar is (je kan hier ook checken op welke hardware: bluethoot, wifi of celluar).
+ -> IAlert: Implementatie van Popups in de app.
