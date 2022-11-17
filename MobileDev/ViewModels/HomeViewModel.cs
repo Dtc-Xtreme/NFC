@@ -28,12 +28,13 @@ namespace MobileDev.ViewModels
         private ITranslator translator;
         private IServiceProvider serviceProvider;
         private IAlertService alertService;
+        private ICalendarRepository<CalendarItem> calendarRepository;
         private readonly IFingerprint fingerprint;
         private List<CalendarItem> items;
         private bool isRefreshing = false;
         private bool auth = false;
 
-        public HomeViewModel(IConfiguration conf, ITranslator trans, IServiceProvider serv, IFingerprint fingerprint, IAlertService alert)
+        public HomeViewModel(IConfiguration conf, ITranslator trans, IServiceProvider serv, IFingerprint fingerprint, IAlertService alert, ICalendarRepository<CalendarItem> calendarRepository)
         {
             // Check  theme and languages setting when started.
             this.configuration = conf;
@@ -41,7 +42,7 @@ namespace MobileDev.ViewModels
             this.serviceProvider = serv;
             this.fingerprint = fingerprint;
             this.alertService = alert;
-
+            this.calendarRepository = calendarRepository;
 
             if (DeviceInfo.Current.Platform == DevicePlatform.WinUI)
             {
@@ -96,18 +97,8 @@ namespace MobileDev.ViewModels
         [RelayCommand]
         private async void GetAPI()
         {
-            try
-            {
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync("https://api.dtc-xtreme.net/Calendar");
-                response.EnsureSuccessStatusCode();
-                Items = await response.Content.ReadFromJsonAsync<List<CalendarItem>>();
-                IsRefreshing = false;
-            } catch (Exception ex)
-            {
-                //
-                Console.WriteLine("Errors: " + ex.Message);
-            }
+            Items = await this.calendarRepository.GetAll();
+            IsRefreshing = false;
         }
 
         [RelayCommand]
@@ -118,7 +109,7 @@ namespace MobileDev.ViewModels
             if (result.Authenticated)
             {
                 Auth = true;
-                await alertService.ShowAlertAsync("Authenticate!", "Access Granted", "OK");
+                //await alertService.ShowAlertAsync("Authenticate!", "Access Granted", "OK");
             }
             else
             {

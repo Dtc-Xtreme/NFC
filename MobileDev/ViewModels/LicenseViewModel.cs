@@ -5,7 +5,6 @@ using Microsoft.Maui.ApplicationModel.Communication;
 using MobileDev.Services;
 using MobileDev.Views;
 using PetanqueCL.Models;
-using PetanqueCL.Repositories;
 using Plugin.NFC;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -15,29 +14,33 @@ using System.Net.Http.Json;
 using PetanqueCL.Models;
 using System.Diagnostics.Metrics;
 using System.Reflection;
-
+using System.Windows.Input;
 
 namespace MobileDev.ViewModels
 {
     public partial class LicenseViewModel : BaseViewModel
     {
         private IAlertService alertService;
+        private ILicenseRepository<License> licenseRepository;
         private DisplayOrientation orientation;
-        private int pageSize = 5;
+        private int pageSize = 10;
 
         private bool split;
         private bool nfcAvailable = true;
         private GridLength columnWidth;
         private License? selectedLicense = null;
         private string searchText;
-        private List<License> licenses = new List<License>();
         private ObservableCollection<License> searchResults = new ObservableCollection<License>();
         private ObservableCollection<License> showResults = new ObservableCollection<License>();
 
-        public LicenseViewModel(IAlertService alert)
+
+        public ICommand LoadExtraCommand { get; set; }
+        public LicenseViewModel(IAlertService alert, ILicenseRepository<License> licenseRepository)
         {
             this.alertService = alert;
+            this.licenseRepository = licenseRepository;
             DeviceDisplay.MainDisplayInfoChanged += OnMainDisplayInfoChanged;
+            LoadExtraCommand = new Command(LoadMoreData, LoadMoreDate_CanExecute);
             CheckOrientation();
             GetAPI();
         }
@@ -74,11 +77,13 @@ namespace MobileDev.ViewModels
             get { return selectedLicense; }
             set
             {
-                selectedLicense = value;
-                OnPropertyChanged();
-                if (orientation == DisplayOrientation.Portrait)
+                if (selectedLicense != value)
                 {
-                    Navigate();
+                    SetProperty(ref selectedLicense, value);
+                    if (orientation == DisplayOrientation.Portrait)
+                    {
+                        Navigate();
+                    }
                 }
             }
         }
@@ -91,15 +96,7 @@ namespace MobileDev.ViewModels
                 OnPropertyChanged();
             }
         }
-        public List<License> Licenses
-        {
-            get { return this.licenses; }
-            set
-            {
-                this.licenses = value;
-                OnPropertyChanged();
-            }
-        }
+
         public ObservableCollection<License> SearchResults
         {
             get { return this.searchResults; }
@@ -127,7 +124,7 @@ namespace MobileDev.ViewModels
             //Number = 1;
         }
 
-        [RelayCommand]
+        //[RelayCommand]
         private void LoadMoreData()
         {
             int counter = ShowResults.Count();
@@ -141,29 +138,17 @@ namespace MobileDev.ViewModels
             }
         }
 
-        [RelayCommand]
-        private void Search()
+        private bool LoadMoreDate_CanExecute()
         {
-            int numeric;
-            bool isNumeric = int.TryParse(SearchText, out numeric);
-            if (isNumeric)
-            {
-                SearchResults = new ObservableCollection<License>();
-                ShowResults = new ObservableCollection<License>();
-                SearchResults.Add(Licenses.FirstOrDefault(x => x.Nr == numeric));
-                ShowResults = SearchResults;
-            }
-            else
-            {
-                SearchResults = new ObservableCollection<License>();
-                ShowResults = new ObservableCollection<License>();
-                SearchResults = new ObservableCollection<License>(Licenses.Where(c => c.FirstName.ToLower().Contains(SearchText.ToLower()) || c.LastName.ToLower().Contains(SearchText.ToLower())));
-            }
+            return ShowResults.Count() < SearchResults.Count();
+        }
 
-            //if (SearchResults.Count == 1)
-            //{
-            //    SelectedLicense = ShowResults.First();
-            //}
+        [RelayCommand]
+        private async void Search()
+        {
+            SearchResults.Clear();
+            ShowResults.Clear();
+            SearchResults = new ObservableCollection<License>(await licenseRepository.Find(SearchText));
         }
 
         private async void Navigate()
@@ -192,13 +177,16 @@ namespace MobileDev.ViewModels
 
         }
 
+        private async void GetAPI()
+        {
+            SearchResults = new ObservableCollection<License>(await licenseRepository.GetAll());
+        }
+
         // Events //
         private void OnMainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
         {
             CheckOrientation();
         }
-
-
         
         //#####//
         // NFC //
@@ -312,9 +300,15 @@ namespace MobileDev.ViewModels
 
                 string json = tagInfo.Records[0].Message;
                 License lic = JsonSerializer.Deserialize<License>(json, jsonSerializerOptions);
+
+                NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+                if (accessType == NetworkAccess.Internet)
+                {
+                    License? result = await licenseRepository.FindById(lic.Id);
+                    if(result != null) lic = result;
+                }
                 SelectedLicense = lic;
             }
-
         }
 
         /// <summary>
@@ -507,24 +501,6 @@ namespace MobileDev.ViewModels
             }
 
             return message;
-        }
-
-        private async void GetAPI()
-        {
-            try
-            {
-                HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync("https://api.dtc-xtreme.net/License");
-                response.EnsureSuccessStatusCode();
-                Licenses = new List<License>();
-                Licenses = await response.Content.ReadFromJsonAsync<List<License>>();
-                Licenses.AddRange(Licenses);
-                SearchResults = new ObservableCollection<License>(Licenses);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Errors: " + ex.Message);
-            }
         }
     }
 }

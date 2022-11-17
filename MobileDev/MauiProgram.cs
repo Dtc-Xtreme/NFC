@@ -18,6 +18,7 @@ using Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories.SeedData;
 using System;
+using PetanqueCL.Models;
 
 namespace MobileDev;
 
@@ -89,16 +90,8 @@ public static class MauiProgram
         builder.Services.AddTransient<AppShell>();
         builder.Services.AddSingleton(typeof(IFingerprint), CrossFingerprint.Current);
         builder.Services.AddSingleton<IAlertService, AlertService>();
-
-        //builder.Services.AddSingleton<TestRepository>();
-
-        //builder.Services.AddTransient<PetanqueDbContext>();
-        //builder.Services.AddTransient<IPetanqueRepository, EFPetanqueRepository>();
-        //builder.Services.AddTransient<IGenderRepository, EFGenderRepository>();
-        //builder.Services.AddTransient<IFederationRepository, EFFederationRepository>();
-        //builder.Services.AddTransient<IProvinceRepository, EFProvinceRepository>();
-        //builder.Services.AddTransient<IClubRepository, EFClubRepository>();
-        //builder.Services.AddTransient<ILicenseRepository, EFLicenseRepository>();
+        builder.Services.AddTransient<ILicenseRepository<License>, LicenseRepository>();
+        builder.Services.AddTransient<ICalendarRepository<CalendarItem>, CalendarRepository>();
 
         builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<HomeViewModel>();

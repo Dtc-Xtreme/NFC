@@ -21,7 +21,7 @@
             <SearchBar Grid.Row="0" Grid.Column="0" SearchCommand="{Binding SearchCommand}" Text="{Binding SearchText, Mode=TwoWay}" Placeholder="{multilanguage:Translation Key=Search}" HorizontalOptions="StartAndExpand"/>
             <ImageButton Grid.Column="1" HorizontalOptions="End" Padding="5" Source="{AppThemeBinding Light={StaticResource Key=NFCBlack}, Dark={StaticResource Key=NFCWhite}}" Command="{Binding NfcCommand}" IsEnabled="{Binding NFCAvailable}"/>
         </Grid>
-        <CollectionView Grid.Row="1" VerticalOptions="FillAndExpand" ItemsSource="{Binding ShowResults, Mode=TwoWay}" RemainingItemsThreshold="5" RemainingItemsThresholdReachedCommand="{Binding LoadMoreDataCommand}" ItemsUpdatingScrollMode="KeepItemsInView" SelectedItem="{Binding SelectedLicense, Mode=TwoWay}" SelectionMode="Single">
+        <CollectionView Grid.Row="1" VerticalOptions="FillAndExpand" ItemsSource="{Binding ShowResults, Mode=TwoWay}" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding LoadExtraCommand}" ItemsUpdatingScrollMode="KeepItemsInView" SelectedItem="{Binding SelectedLicense, Mode=TwoWay}" SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10">
