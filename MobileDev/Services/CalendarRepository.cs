@@ -11,6 +11,13 @@ namespace MobileDev.Services
 {
     public class CalendarRepository : ICalendarRepository<CalendarItem>
     {
+        private IAlertService alertService;
+
+        public CalendarRepository(IAlertService alertService)
+        {
+            this.alertService = alertService;
+        }
+
         public async Task<List<CalendarItem>> GetAll()
         {
             try
@@ -23,6 +30,7 @@ namespace MobileDev.Services
             catch (Exception ex)
             {
                 Console.WriteLine("Errors: " + ex.Message);
+                alertService.ShowAlert("Error!", ex.Message);
             }
             return null;
         }

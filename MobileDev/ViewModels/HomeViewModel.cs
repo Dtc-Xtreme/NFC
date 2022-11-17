@@ -19,6 +19,7 @@ using Repositories.SeedData;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories;
 using MobileDev.Services;
+using Plugin.LocalNotification;
 
 namespace MobileDev.ViewModels
 {
@@ -62,7 +63,6 @@ namespace MobileDev.ViewModels
             }
 
             translator.SetCurrentCulture(new CultureInfo(settings.Language));
-            GetAPI();
         }
 
         public List<CalendarItem> Items
@@ -95,7 +95,7 @@ namespace MobileDev.ViewModels
         }
 
         [RelayCommand]
-        private async void GetAPI()
+        private async Task GetAPI()
         {
             Items = await this.calendarRepository.GetAll();
             IsRefreshing = false;
@@ -108,6 +108,7 @@ namespace MobileDev.ViewModels
             var result = await fingerprint.AuthenticateAsync(request);
             if (result.Authenticated)
             {
+                await GetAPI();
                 Auth = true;
                 //await alertService.ShowAlertAsync("Authenticate!", "Access Granted", "OK");
             }

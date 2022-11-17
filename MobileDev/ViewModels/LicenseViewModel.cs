@@ -15,6 +15,7 @@ using PetanqueCL.Models;
 using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Windows.Input;
+using Plugin.LocalNotification;
 
 namespace MobileDev.ViewModels
 {
@@ -120,8 +121,23 @@ namespace MobileDev.ViewModels
         [RelayCommand]
         private async void Nfc()
         {
-            await StartListeningIfNotiOS();
-            //Number = 1;
+            if (!CrossNFC.Current.IsEnabled)
+            {
+                NotificationRequest request = new NotificationRequest
+                {
+                    Title = "NFC",
+                    Description = "Your device does not support NFC or it may be disabled!",
+                    Schedule = new NotificationRequestSchedule
+                    {
+                        NotifyTime = DateTime.Now
+                    }
+                };
+                LocalNotificationCenter.Current.Show(request);
+            }
+            else
+            {
+                await StartListeningIfNotiOS();
+            }
         }
 
         //[RelayCommand]
@@ -308,6 +324,9 @@ namespace MobileDev.ViewModels
                     if(result != null) lic = result;
                 }
                 SelectedLicense = lic;
+                //SearchResults.Clear();
+                //ShowResults.Clear();
+                //SearchResults = new ObservableCollection<License> { lic };
             }
         }
 

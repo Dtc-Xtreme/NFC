@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Repositories.SeedData;
 using System;
 using PetanqueCL.Models;
+using Plugin.LocalNotification;
 
 namespace MobileDev;
 
@@ -61,6 +62,7 @@ public static class MauiProgram
 
         builder
             .UseMauiApp<App>()
+            .UseLocalNotification()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
